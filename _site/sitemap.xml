@@ -10,8 +10,6 @@
     
   
     
-  
-    
       <url>
         <loc>http://localhost:4000/blog/</loc>
         
@@ -35,6 +33,8 @@
           
         
        </url>
+    
+  
     
   
     
