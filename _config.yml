@@ -31,7 +31,7 @@ force-https: True
 lang: "en"
 author: "Seongwon Lee"
 title: "{SnowyOwl}"
-description: "Blog and website of John Smith, blogging mainly for tech. Opinions expressed are mine."
+description: "Blog and website of SnowyOwl, blogging mainly for Embedded System, Robotics, Dynamics modeling, Control Theory, Computer Vistion, ML, DL and RL Opinions expressed are mine."
 keywords: "Robotics, Autonumus car,Machine Learing, Deep Learning, Reinforcement Learning, Photograph"
 favicon: "/img/logo_white.png"
 
@@ -117,11 +117,11 @@ fb-share: True
 twitter-share: True
 linkedin-share: True
 reddit-share: True
-google-plus-share: True
-tumblr-share: True
-pinterest-share: True
-pocket-share: True
-vkontakte-share: True
+google-plus-share: False
+tumblr-share: False
+pinterest-share: False
+pocket-share: False
+vkontakte-share: False
 
 disqus-shortname: "personal-jekyll-theme"
 
@@ -190,7 +190,7 @@ social:
 # 404 page #
 ############
 
-err-404-img: "/img/labtocat.png"
+err-404-img: "/img/author.png"
 
 ##################
 # GPG on Keybase #

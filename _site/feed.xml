@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
 	<channel>
 		<title>{SnowyOwl}</title>
-		<description>Blog and website of John Smith, blogging mainly for tech. Opinions expressed are mine.</description>
+		<description>Blog and website of SnowyOwl, blogging mainly for Embedded System, Robotics, Dynamics modeling, Control Theory, Computer Vistion, ML, DL and RL Opinions expressed are mine.</description>
 		<link>http://localhost:4000</link>
 		<atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
 		
