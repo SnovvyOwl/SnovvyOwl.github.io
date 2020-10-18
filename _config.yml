@@ -40,7 +40,7 @@ favicon: "/img/logo_white.png"
 ################
 
 black-favicon: "/img/logo_white.png"
-logo: #"/img/author.png" # leave blank if you don't want a logo
+logo: #"/img/author.jpg" # leave blank if you don't want a logo
 
 background-img: "../img/intro-bg.jpg"
 
@@ -168,7 +168,7 @@ pgp: False
 
 # if the author_blurb is not set, then this feature is skipped
 author_blurb: "Seongwon Lee"
-author_blurb_image: "/img/author.png"
+author_blurb_image: "/img/author.jpg"
 
 ##################
 # Social Buttons #
@@ -190,7 +190,7 @@ social:
 # 404 page #
 ############
 
-err-404-img: "/img/author.png"
+err-404-img: "/img/author.jpg"
 
 ##################
 # GPG on Keybase #

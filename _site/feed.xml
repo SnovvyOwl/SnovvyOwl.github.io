@@ -6,5 +6,17 @@
 		<link>http://localhost:4000</link>
 		<atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
 		
+			<item>
+				<title>Using C++ for MultiThread processing</title>
+				
+				
+					<description>&lt;p&gt;요즘 개인적으로 라즈베리파이로 학부 졸업논문으로 만들었던 공 로봇을 다시 처음부터 만들어서 제대로 만들어보려고 하고 있다,&lt;/p&gt;
+</description>
+				
+				<pubDate>Thu, 12 Mar 2020 00:00:00 +0900</pubDate>
+				<link>http://localhost:4000/khu-kongbot/2020/03/12/Raspberry-PI-with-C++.html</link>
+				<guid isPermaLink="true">http://localhost:4000/khu-kongbot/2020/03/12/Raspberry-PI-with-C++.html</guid>
+			</item>
+		
 	</channel>
 </rss>
