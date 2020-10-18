@@ -33,13 +33,13 @@ author: "Seongwon Lee"
 title: "{SnowyOwl}"
 description: "Blog and website of John Smith, blogging mainly for tech. Opinions expressed are mine."
 keywords: "Robotics, Autonumus car,Machine Learing, Deep Learning, Reinforcement Learning, Photograph"
-favicon: "/img/favicon.ico"
+favicon: "/img/logo_white.png"
 
 ################
 # Header layout #
 ################
 
-black-favicon: "/img/black-lab-glass.ico"
+black-favicon: "/img/logo_white.png"
 logo: #"/img/author.png" # leave blank if you don't want a logo
 
 background-img: "../img/intro-bg.jpg"
