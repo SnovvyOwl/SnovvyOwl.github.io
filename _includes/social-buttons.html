@@ -4,7 +4,7 @@
     {% for network in site.social %}
     <li><a href="{{ network.url }}" target="_blank"><i class="fa fa-{{ network.title }} fa-fw"></i></a></li>
         {%if network.title.equals("Naver")}
-        <li><a href="{{ network.url }}" target="_blank"><i class="mdi mdi-account-arrow-right"></i></a></li>
+        <li><a href="{{ network.url }}" target="_blank"><i class="fa fa-key fa-fw"></i></a></li>
         {% endif %}
     {% endfor %}
     {% if site.keybase-in-social %}
