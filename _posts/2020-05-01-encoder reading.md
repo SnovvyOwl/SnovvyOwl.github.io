@@ -5,7 +5,7 @@ title: Encoder sensing Code with RPi
 category: KHU-KongBot
 tags: [ 'RaspberryPi' ]
 ---
-요	
+
 [C/C++] 라즈베리파이로 엔코더의 각도측정 및 각속도 계산  Raspberry Pi
 
 임베디드 소프트웨어와 하드웨어를 공부하다보면 종종 모터에 의한 링크와 바디의 각도 또는 각속도를 측정할 필요가 있다.
