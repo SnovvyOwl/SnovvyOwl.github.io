@@ -1,9 +1,9 @@
 ---
 layout: post
 section-type: post
-title: Socket Communication between Linux Computer and Raspberry Pi {C++}
+title: Socket Communication for Linux[ubuntu] {C++}
 category: KHU-KongBot
-tags: [ 'Socket Communication','RaspberryPI']
+tags: [ 'Socket Communication','Linux[ubuntu]']
 ---
 
 KHU-Kongbot2 Project를 진행하면서 객체지향적 요소를 왠만하면 넣지 않을라고 했다. 이유는 함께하는 기계과 친구들이 객체지향보다 절차지향적인 코드에 익숙했기 때문이다.
@@ -22,9 +22,12 @@ KHU-Kongbot2 Project를 진행하면서 객체지향적 요소를 왠만하면 �
 
 리소스를 생각하기 때문에 모든 코드는 C++로 작성하는 중이었으니 이를 유지하기로 했다.
 
-이번에 그 소켓통신 공부하면서 간단히 테스트용으로 만든 소켓통신 코드를 포스팅하기로한다.
+이번에 그 소켓통신 공부하면서 간단히 테스트용으로 만든 소켓통신 코드를 포스팅하기로 한다.
 
-# Client.h
+클라이언트의 환경은 Ra
+
+# Client
+## client.h
 
 <pre><code data-trim class="yml">
 #pragma once
@@ -47,12 +50,29 @@ class Client{
     public:
         Client(const char *hostname, const int _port);//client 생성자 prameter로 서버주소와 포트를 넣어줌
         void runClient();//client시작 
-        void quitClient();//client 종료
         void receive_send();//서버와 주고 받는 쓰레드
 };
 </code></pre>
 
-# client.cpp
+여기서 중요한 Keypoint는 hostent 이다.
+
+보통 서버의 주소로는 Const char* 를 사용하는데 이 경우 서버가 "127.0.0.1"과 같은 직접적인 IPv4주소를 아래와 같게 직접 써준다.
+
+<pre><code data-trim class="yml">
+server_addr.sin_addr.s_addr=inet_addr("127.0.0.1");
+</code></pre>
+
+하지만 이경우 서버의 주소가 "server.org"와 같은경우는 대처할 수가 없다 따라서 이를 hostent 구조체를 써서 해결한다.
+
+<pre><code data-trim class="yml">
+struct hostent *he; //헤더에 정의함
+he=gethostbyname(hostname);//생성자에 정의함
+server_addr.sin_addr.s_addr=*(long*)(he->h_addr_list[0]);//생성자에 정의함
+</code></pre>
+
+이렇게 하면 문제가 되는 서버의 주소도 처리가 가능해진다.
+
+## client.cpp
 <pre><code data-trim class="yml">
 #include<client.h>
 using namespace std;
@@ -65,44 +85,43 @@ Client::Client(const char *hostname, const int _port)
     server_addr.sin_port = htons(_port);
     server_addr.sin_addr.s_addr=*(long*)(he->h_addr_list[0]);
     if(client==-1){
-        cerr<< "\n Socket creation error \n";
+        cerr<< "\n Socket creation error \n";//소켓이 만들어지지 않았을 경우 프로그램 종료
         msgReceive="quit";
 	    exit(1);
     }
     if (connect(client, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0){    
-        cerr<<"\nConnection Failed \n"; 
+        cerr<<"\nConnection Failed \n"; //서버와 연결되지 않았을 경우 프로그램 종료
         msgReceive="quit";
         exit(1);
     }
-    runClient();
+    runClient();//runClient함수 호출
 }
        
 void Client::runClient(){
-    thread sockReceive([&](){receive_send();});
+    thread sockReceive([&](){receive_send();});//소켓통신을 통해 데이터만 주고 받는 쓰레드
     int i=0;
-    sockReceive.detach();
+    sockReceive.detach();//메인 쓰레드와 생성된 쓰레드가 완전히 독립적으로 작동함.
     do{ 
         msgSend=to_string(i)+"\n";
-        send(client,msgSend.c_str(),msgSend.size(),0); 
+        send(client,msgSend.c_str(),msgSend.size(),0); //서버로 i를 보냄
         i++;
-    } while (msgReceive[0] != 'q');
-    //cout << "quit" << endl;  
-    quitClient();
+    } while (msgReceive    != 'q');//서버에서 받은 데이터가 q로 시작될경우 종료
+    close(client); //보통 서버가 먼저 꺼지면 프로그램이 자동 종료 된다.
 }
-void Client::quitClient(){
-    cout<<"Close.."<<endl;
-    close(client); 
-    cout<<"OFF"<<endl;
-    exit(1);
-}
+
 void Client::receive_send(){
-    //Socket INPUT and SEND Nano [THREAD 3]
-    char buffer[BUFF_SIZE]={0};
+    //Socket receive[THREAD 2]
+    char buffer[BUFF_SIZE]={0};//서버에서 보낸 데이터를 받을 버퍼
     do {
-        read(client,buffer,BUFF_SIZE);
-        msgReceive=buffer;
-        //serialPuts(Nano,CMD.c_str());
-        buffer[0]={0,};
+        read(client,buffer,BUFF_SIZE);//받은 데이터를 버퍼에 저장
+        msgReceive=buffer;//버퍼를 string으로 변환
+        buffer[0]={0,};//버퍼 초기화
     } while ( msgReceive != "q");
 }
 </code></pre>
+
+여기서 read()와 send()는 정의에 따라 cstring 형태로 데이터를 주고 받는다 따라서 익숙한 string 형태를 쓰기 위해 보낼때는 받은 문자열 배열을 string 멤버 변수에 저장을 한다.
+
+그리고 보낼때는 string을 .c_str()과 같은 메서드로  변환해서 보내준다.
+
+ 
