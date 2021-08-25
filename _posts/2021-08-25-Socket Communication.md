@@ -24,7 +24,6 @@ KHU-Kongbot2 Project를 진행하면서 객체지향적 요소를 왠만하면 �
 
 이번에 그 소켓통신 공부하면서 간단히 테스트용으로 만든 소켓통신 코드를 포스팅하기로 한다.
 
-클라이언트의 환경은 Ra
 
 # Client
 ## client.h
@@ -58,13 +57,13 @@ class Client{
 
 보통 서버의 주소로는 Const char* 를 사용하는데 이 경우 서버가 "127.0.0.1"과 같은 직접적인 IPv4주소를 아래와 같게 직접 써준다.
 
-<pre><code data-trim class="yml">
+<pre><code>
 server_addr.sin_addr.s_addr=inet_addr("127.0.0.1");
 </code></pre>
 
-하지만 이경우 서버의 주소가 "server.org"와 같은경우는 대처할 수가 없다 따라서 이를 hostent 구조체를 써서 해결한다.
+하지만 이경우 서버의 주소가 "https://snovvyowl.github.io"와 같은경우는 대처할 수가 없다 따라서 이를 hostent 구조체를 써서 해결한다.
 
-<pre><code data-trim class="yml">
+<pre><code >
 struct hostent *he; //헤더에 정의함
 he=gethostbyname(hostname);//생성자에 정의함
 server_addr.sin_addr.s_addr=*(long*)(he->h_addr_list[0]);//생성자에 정의함
@@ -73,7 +72,8 @@ server_addr.sin_addr.s_addr=*(long*)(he->h_addr_list[0]);//생성자에 정의�
 이렇게 하면 문제가 되는 서버의 주소도 처리가 가능해진다.
 
 ## client.cpp
-<pre><code data-trim class="yml">
+
+<pre><code>
 #include<client.h>
 using namespace std;
 #define BUFF_SIZE 8
