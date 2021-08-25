@@ -28,6 +28,7 @@
   
 
   <!-- Custom Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
   <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -214,13 +215,20 @@
 
 <ul class="list-inline social-buttons">
     
-    <li><a href="https://instagram.com/S.nowyo.W.L" target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
     
-    <li><a href="https://github.com/SnovvyOwl" target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+        
+        <li><a href="https://instagram.com/S.nowyo.W.L" target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
+        
     
-    <li><a href="https://snowy0wl.tistory.com/" target="_blank"><i class="fa fa-tistory fa-fw"></i></a></li>
     
-    <li><a href="https://blog.naver.com/owl0614" target="_blank"><i class="fa fa-pied-piper-hat fa-fw"></i></a></li>
+        
+        <li><a href="https://github.com/SnovvyOwl" target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+        
+    
+    
+        
+        <li><a href="https://blog.naver.com/owl0614" target="_blank"><i class="ri-pages-line"></i></a></li>
+        
     
     
 </ul>
@@ -231,7 +239,7 @@
     <p><br><br></p>
 
     <div class="container text-center">
-        <p>Copyright &copy; Seongwon Lee 2020</p>
+        <p>Copyright &copy; Seongwon Lee 2021</p>
         
     </div>
 </footer>
@@ -278,67 +286,12 @@ $(window).scroll(toggleNavCollapse);$(function(){$("a.page-scroll").bind("click"
 <script>
 function addTohistory() {
   if (!window.location.host.startsWith("127.0.0.1")) {
-    history.pushState({}, 'Blog', 'http://localhost:4000/blog/');
+    history.pushState({}, 'Blog', 'https://SnovvyOwl.github.io/blog/');
   }
 }
 </script>
 
 <!-- Gesture Navigation / Swipe Instruction Start -->
-
-
-  
-
-  
-
-    <!-- Blog Gesture Navigation Start -->
-
-    <script type="text/javascript" src="/js/hammer.min.js"></script>
-
-    <script>
-      var page = document.getElementById('page');
-
-      new Hammer(page).on('swipeleft', function(event) {
-        addTohistory();
-        
-          document.location.replace("/");
-        
-      });
-      new Hammer(page).on('swiperight', function(event) {
-        addTohistory();
-        
-          document.location.replace("/");
-        
-      });
-    </script>
-
-    <!-- Blog Gesture Navigation Start -->
-
-  
-
-  
-
-    <!-- Swipe Instructions for Blog Start -->
-
-    <script>
-      $(document).ready(function(){
-        if(!localStorage.getItem('blog-swipeshowed')){
-          $("#swipe-instruction").fadeIn();
-          $("#swipe-instruction .close-swipe-instruction").click(function(){
-            $("#swipe-instruction").fadeOut();
-          });
-          localStorage.setItem('blog-swipeshowed', true);
-        }
-      });
-    </script>
-
-    <!-- Swipe Instructions for Blog End -->
-
-  
-
-  
-
-<!-- Gesture Navigation / Swipe Instruction End -->
-
 
 
 <!-- Javascript End -->

@@ -20,8 +20,12 @@
     
   
     
+  
+    
+  
+    
       <url>
-        <loc>http://localhost:4000/blog/</loc>
+        <loc>https://SnovvyOwl.github.io/blog/</loc>
         
           
           
@@ -34,7 +38,7 @@
   
     
       <url>
-        <loc>http://localhost:4000/</loc>
+        <loc>https://SnovvyOwl.github.io/</loc>
         
           
           
@@ -61,9 +65,27 @@
   
   
     <url>
-      <loc>http://localhost:4000/khu-kongbot/2020/03/12/Raspberry-PI-with-C++.html</loc>
+      <loc>https://SnovvyOwl.github.io/khu-kongbot/2021/08/25/Socket-Communication.html</loc>
       
-        <lastmod>2020-03-12T00:00:00+09:00</lastmod>
+        <lastmod>2021-08-25T00:00:00+09:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://SnovvyOwl.github.io/khu-kongbot/2020/05/01/encoder-reading.html</loc>
+      
+        <lastmod>2020-05-01T00:00:00+09:00</lastmod>
+      
+      <changefreq>weekly</changefreq>
+      <priority>1.0</priority>
+    </url>
+  
+    <url>
+      <loc>https://SnovvyOwl.github.io/khu-kongbot/2020/03/24/Raspberry-PI-with-C++.html</loc>
+      
+        <lastmod>2020-03-24T00:00:00+09:00</lastmod>
       
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>

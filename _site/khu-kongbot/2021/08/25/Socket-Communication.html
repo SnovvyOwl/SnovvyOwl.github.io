@@ -1,0 +1,740 @@
+
+<!-- Post Layout Start -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+  
+<!-- HEAD Start -->
+
+<head>
+  
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Blog and website of SnowyOwl, blogging mainly for Embedded System, Robotics, Dynamics modeling, Control Theory, Computer Vistion, ML, DL and RL Opinions expressed are mine.">
+  <meta name="author" content="Seongwon Lee">
+  <meta name="keywords" content="Robotics, Autonumus car,Machine Learing, Deep Learning, Reinforcement Learning, Photograph">
+  <link rel="canonical" href="/khu-kongbot/2021/08/25/Socket-Communication.html">
+  <title>{SnowyOwl} | Socket Communication for Linux[ubuntu] {C++}</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <link href="/css/grayscale.css" rel="stylesheet">
+  
+
+  <!-- Custom Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/rrssb.css" />
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo_white.png">
+  
+
+  
+
+  
+
+
+  <!-- iOS Web App mode -->
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" sizes="36x36" href="/img/web-app/icon-36p.png">
+  <link rel="apple-touch-icon" sizes="48x48" href="/img/web-app/icon-48p.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/img/web-app/icon-72p.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="/img/web-app/icon-96p.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/img/web-app/icon-144p.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/img/web-app/icon-192p.png">
+
+  <!-- Android Web App mode -->
+
+  <link rel="manifest" href="/manifest.json">
+
+
+
+
+  
+<!-- Chrome, Firefox OS and Opera -->
+<meta name="theme-color" content="#000000">
+<!-- Windows Phone -->
+<meta name="msapplication-navbutton-color" content="#000000">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+  
+
+
+  <!-- Syntax highlight in post pages -->
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/monokai_sublime.min.css">
+
+
+
+
+</head>
+
+<!-- HEAD End -->
+
+
+  <body>
+
+    
+<!-- Navigation Start -->
+
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+        <i class="fa fa-bars"></i>
+      </button>
+      
+        <a class="navbar-brand" href="/">
+      
+          <div>
+            
+              <img src="/img/logo_white.png" alt="">
+            
+	    
+              {SnowyOwl}
+          </div>
+        </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <ul class="nav navbar-nav">
+        
+          <!-- Blog, Post, Tag and Error pages -->
+          
+            <li>
+            
+                <a href="/#profile"> profile </a>
+            
+            </li>
+          
+            <li>
+            
+              
+                <a href="/blog/"> Blog </a>
+              
+            
+            </li>
+          
+            <li>
+            
+                <a href="/#timeline"> Timeline </a>
+            
+            </li>
+          
+            <li>
+            
+                <a href="/#contact"> Contact </a>
+            
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Navigation End -->
+
+
+    <section id="post" class="container content-section text-center">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+
+          
+<!-- Swipe Instructions Start -->
+
+<div id="swipe-instruction">
+  <div>
+    <p><br><br><br></p>
+    <i id="hand-swipe" class="fa fa-hand-o-up"></i>
+    <p><strong>
+    
+      Did you know that you can navigate the posts by swiping left and right?
+    
+    </strong></p>
+    <button type="button" class="btn btn-default ok-btn close-swipe-instruction">
+      
+        Awesome!
+      
+    </button>
+  </div>
+</div>
+
+<!-- Swipe Instructions End -->
+
+
+          <h1><strong>Socket Communication for Linux[ubuntu] {C++}</strong></h1>
+          <h4>
+            <strong>25 Aug 2021</strong>
+            <small>
+              . category:
+              <a class="category" href="/categories/khu-kongbot.html">
+                KHU-KongBot
+              </a>.
+              <a href="/khu-kongbot/2021/08/25/Socket-Communication.html#disqus_thread">Comments</a>
+              <br />
+              
+                <a class="tag" href="/tags/socket communication.html">#Socket Communication</a>
+              
+                <a class="tag" href="/tags/linux[ubuntu].html">#Linux[ubuntu]</a>
+              
+            </small>
+          </h4>
+
+          <section class="text-justify">
+            <p>KHU-Kongbot2 Project를 진행하면서 객체지향적 요소를 왠만하면 넣지 않을라고 했다. 이유는 함께하는 기계과 친구들이 객체지향보다 절차지향적인 코드에 익숙했기 때문이다.</p>
+
+<p>하지만 계속 진행하다보니 코드가 점점 꼬였다.</p>
+
+<p>실제로 각각의 요소별로 같은 코드로 묶이는 것들도 많았고 요소별로 다른 함수를 작성하고 변수를 일일이 설정해줘야해서 코드가 복잡해지다보니 알아보기도 힘들고 코드길이가 많이 길어졌다.</p>
+
+<p>따라서 이를 해결하기 위해 프로그램을 절차지향에서 객체지향으로 다시 짜기로 마음 먹었다.</p>
+
+<p>또한 객체지향으로 바꾸면서 기존의 로봇의 현재의 state를 계산하고 이에 따른 제어 input을 계산하는 헤더파일을 만들었다.</p>
+
+<p>만들어진 헤더파일의 크기와 계산양을 보니 라즈베리파이4에서 이를 계산하고 시리얼통신을 통해 아두이노로 내려주는 것까지 하기엔 너무 리소스가 모잘라 보였다.</p>
+
+<p>결국이 제어 입력과 현재의 상태를 계산하는 코드를 서버에서 돌리기로 했고  라즈베리파이4와는 소켓통신으로 연결해주기로 하였다.</p>
+
+<p>리소스를 생각하기 때문에 모든 코드는 C++로 작성하는 중이었으니 이를 유지하기로 했다.</p>
+
+<p>이번에 그 소켓통신 공부하면서 간단히 테스트용으로 만든 소켓통신 코드를 포스팅하기로 한다.</p>
+
+<h1 id="client">Client</h1>
+<h2 id="clienth">client.h</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#pragma once
+#include&lt;iostream&gt;
+#include&lt;string.h&gt;
+#include&lt;thread&gt;
+#include&lt;unistd.h&gt;
+#include&lt;arpa/inet.h&gt;
+#include&lt;sys/socket.h&gt;
+#include&lt;netdb.h&gt;
+</span><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define BUFF_SIZE 8
+</span><span class="n">class</span> <span class="n">Client</span><span class="p">{</span>
+    <span class="nl">private:</span>
+        <span class="kt">int</span> <span class="n">client</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> 
+        <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">server_addr</span><span class="p">;</span> <span class="c1">//서버의 주소가 저장되는 구조체</span>
+        <span class="n">string</span> <span class="n">msgReceive</span><span class="o">=</span><span class="s">""</span><span class="p">;</span><span class="c1">//받은 메세지 저장</span>
+        <span class="n">string</span> <span class="n">msgSend</span><span class="o">=</span><span class="s">""</span><span class="p">;</span><span class="c1">//보낸 메세지</span>
+        <span class="k">struct</span> <span class="n">hostent</span> <span class="o">*</span><span class="n">he</span><span class="p">;</span><span class="c1">//server가 URL주소일 경우 일차적으로 hostent 구조체의 이름으로 넣어짐.</span>
+    <span class="nl">public:</span>
+        <span class="n">Client</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">_port</span><span class="p">);</span><span class="c1">//client 생성자 prameter로 서버주소와 포트를 넣어줌</span>
+        <span class="kt">void</span> <span class="n">runClient</span><span class="p">();</span><span class="c1">//client시작 </span>
+        <span class="kt">void</span> <span class="n">receive_send</span><span class="p">();</span><span class="c1">//서버와 주고 받는 쓰레드</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>여기서 중요한 Keypoint는 hostent 이다.</p>
+
+<p>보통 서버의 주소로는 Const char* 를 사용하는데 이 경우 서버가 “127.0.0.1”과 같은 직접적인 IPv4주소를 아래와 같게 직접 써준다.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">server_addr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span><span class="o">=</span><span class="n">inet_addr</span><span class="p">(</span><span class="s">"127.0.0.1"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>하지만 이경우 서버의 주소가 “https://snovvyowl.github.io”와 같은경우는 대처할 수가 없다 따라서 이를 hostent 구조체를 써서 해결한다.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">hostent</span> <span class="o">*</span><span class="n">he</span><span class="p">;</span> <span class="c1">//헤더에 정의함</span>
+<span class="n">he</span><span class="o">=</span><span class="n">gethostbyname</span><span class="p">(</span><span class="n">hostname</span><span class="p">);</span><span class="c1">//생성자에 정의함</span>
+<span class="n">server_addr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span><span class="o">=*</span><span class="p">(</span><span class="kt">long</span><span class="o">*</span><span class="p">)(</span><span class="n">he</span><span class="o">-&gt;</span><span class="n">h_addr_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="c1">//생성자에 정의함</span>
+</code></pre></div></div>
+
+<p>이렇게 하면 문제가 되는 서버의 주소도 처리가 가능해진다.</p>
+
+<h2 id="clientcpp">client.cpp</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;client.h&gt;
+</span><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define BUFF_SIZE 8
+</span><span class="n">Client</span><span class="o">::</span><span class="n">Client</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">_port</span><span class="p">)</span>
+<span class="p">{</span>   
+    <span class="n">he</span><span class="o">=</span><span class="n">gethostbyname</span><span class="p">(</span><span class="n">hostname</span><span class="p">);</span> <span class="c1">// server url</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span> <span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">server_addr</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+    <span class="n">server_addr</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="n">_port</span><span class="p">);</span>
+    <span class="n">server_addr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span><span class="o">=*</span><span class="p">(</span><span class="kt">long</span><span class="o">*</span><span class="p">)(</span><span class="n">he</span><span class="o">-&gt;</span><span class="n">h_addr_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">client</span><span class="o">==-</span><span class="mi">1</span><span class="p">){</span>
+        <span class="n">cerr</span><span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s"> Socket creation error </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span><span class="c1">//소켓이 만들어지지 않았을 경우 프로그램 종료</span>
+        <span class="n">msgReceive</span><span class="o">=</span><span class="s">"quit"</span><span class="p">;</span>
+	    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">server_addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">server_addr</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>    
+        <span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="s">"</span><span class="se">\n</span><span class="s">Connection Failed </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="c1">//서버와 연결되지 않았을 경우 프로그램 종료</span>
+        <span class="n">msgReceive</span><span class="o">=</span><span class="s">"quit"</span><span class="p">;</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">runClient</span><span class="p">();</span><span class="c1">//runClient함수 호출</span>
+<span class="p">}</span>
+       
+<span class="kt">void</span> <span class="n">Client</span><span class="o">::</span><span class="n">runClient</span><span class="p">(){</span>
+    <span class="kr">thread</span> <span class="n">sockReceive</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](){</span><span class="n">receive_send</span><span class="p">();});</span><span class="c1">//소켓통신을 통해 데이터만 주고 받는 쓰레드</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">sockReceive</span><span class="p">.</span><span class="n">detach</span><span class="p">();</span><span class="c1">//메인 쓰레드와 생성된 쓰레드가 완전히 독립적으로 작동함.</span>
+    <span class="k">do</span><span class="p">{</span> 
+        <span class="n">msgSend</span><span class="o">=</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+        <span class="n">send</span><span class="p">(</span><span class="n">client</span><span class="p">,</span><span class="n">msgSend</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="n">msgSend</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="mi">0</span><span class="p">);</span> <span class="c1">//서버로 i를 보냄</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">msgReceive</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span><span class="c1">//서버에서 보낸 메세지 출력</span>
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">msgReceive</span><span class="o">!=</span> <span class="s">"q"</span><span class="p">);</span><span class="c1">//서버에서 받은 데이터가 q로 시작될경우 종료</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">client</span><span class="p">);</span> <span class="c1">//보통 서버가 먼저 꺼지면 프로그램이 자동 종료 된다.</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Client</span><span class="o">::</span><span class="n">receive_send</span><span class="p">(){</span>
+    <span class="c1">//Socket receive[THREAD 2]</span>
+    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFF_SIZE</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="c1">//서버에서 보낸 데이터를 받을 버퍼</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="n">read</span><span class="p">(</span><span class="n">client</span><span class="p">,</span><span class="n">buffer</span><span class="p">,</span><span class="n">BUFF_SIZE</span><span class="p">);</span><span class="c1">//받은 데이터를 버퍼에 저장</span>
+        <span class="n">msgReceive</span><span class="o">=</span><span class="n">buffer</span><span class="p">;</span><span class="c1">//버퍼를 string으로 변환</span>
+        <span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,};</span><span class="c1">//버퍼 초기화</span>
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span> <span class="n">msgReceive</span> <span class="o">!=</span> <span class="s">"q"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>여기서 read()와 send()는 정의에 따라 cstring 형태로 데이터를 주고 받는다 따라서 익숙한 string 형태를 쓰기 위해 보낼때는 받은 문자열 배열을 string 멤버 변수에 저장을 한다.</p>
+
+<p>그리고 보낼때는 string을 .c_str()과 같은 메서드로  변환해서 보내준다.</p>
+<h2 id="maincpp">main.cpp</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;client.h&gt;
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">Client</span> <span class="n">client</span><span class="p">(</span><span class="s">"127.0.0.1"</span><span class="p">,</span><span class="mi">13000</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이제 server쪽을 알아보도록 하자.</p>
+
+<h1 id="server">Server</h1>
+<h2 id="serverh">server.h</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#pragma once
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string&gt;
+#include &lt;unistd.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;thread&gt;
+#include &lt;netdb.h&gt;
+#define BUFF_SIZE 8
+</span><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="n">class</span> <span class="n">Server</span>
+<span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">ip</span><span class="p">;</span><span class="c1">//서버 IP주소</span>
+    <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">13000</span><span class="p">;</span><span class="c1">//포트번호</span>
+    <span class="kt">int</span> <span class="n">server</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//서버 소켓</span>
+    <span class="kt">int</span> <span class="n">client</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//클라이언트 소켓</span>
+    <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">client_addr</span><span class="p">;</span><span class="c1">//클라이언트 소켓 주소  구조체</span>
+    <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">server_addr</span><span class="p">;</span><span class="c1">//서버 소켓 주소 구조체</span>
+    <span class="kt">char</span> <span class="n">CMD</span><span class="p">;</span><span class="c1">//키보드 입력 명령어</span>
+    <span class="n">socklen_t</span> <span class="n">client_addr_len</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">client_addr</span><span class="p">);</span><span class="c1">//소켓주소 길이</span>
+    <span class="n">string</span> <span class="n">msgReceive</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span><span class="c1">//클라이언트에서 보낸 데이터</span>
+    <span class="n">string</span> <span class="n">msgSend</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span><span class="c1">//클라이언트로 보낼 데이터</span>
+<span class="nl">public:</span>
+    <span class="n">Server</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">_ip</span><span class="p">,</span> <span class="kt">int</span> <span class="n">_port</span><span class="p">);</span><span class="c1">//생성자</span>
+    <span class="kt">void</span> <span class="n">startServer</span><span class="p">();</span><span class="c1">//서버시작 메서드</span>
+    <span class="kt">void</span> <span class="n">runServer</span><span class="p">();</span><span class="c1">//서버 동작중 메서드</span>
+    <span class="kt">void</span> <span class="n">receiving</span><span class="p">();</span><span class="c1">//서버에서 데이터 보내는 메서드</span>
+    <span class="kt">void</span> <span class="n">sending</span><span class="p">();</span><span class="c1">//클라이언트에서 데이터 받는 메서드</span>
+    <span class="kt">void</span> <span class="n">keyboardInput</span><span class="p">();</span><span class="c1">//키보드에서 입력 받는 함수</span>
+    <span class="kt">void</span> <span class="n">stopServer</span><span class="p">();</span><span class="c1">// 서버 종료 메서드</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<p>소켓서버는 클라이언트와 계속 내용을 주고 받는다는 가정하에 서버가 강제 종료가 필요할 경우에 이를 하기 위해 키보드 입력 함수를 구현하여 다른 Thread를 이용하여 동작 하려고 한다.</p>
+
+<p>또한 데이터를 보내는 것도 다른 쓰레드로 구성하고 받는 것도 다른 쓰레드로 구성하여 메인을 포함하여 4개의 쓰레드가 동시 동작을 할수 있도록 하자.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;server.h&gt;
+#define BUFF_SIZE 8
+</span><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="n">Server</span><span class="o">::</span><span class="n">Server</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">_ip</span><span class="p">,</span> <span class="kt">int</span> <span class="n">_port</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">_ip</span><span class="p">;</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span><span class="c1">//서버소켓 생성</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">server</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s"> Socket creation error </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span><span class="c1">//소켓 생성 에러</span>
+        <span class="c1">//sock_receive="Quit";</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">server_addr</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+    <span class="n">server_addr</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="n">port</span><span class="p">);</span>
+    <span class="n">server_addr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">htonl</span><span class="p">(</span><span class="n">INADDR_ANY</span><span class="p">);</span>
+    <span class="n">startServer</span><span class="p">();</span><span class="c1">//서버 시작</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">Server</span><span class="o">::</span><span class="n">startServer</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"[Start Server]</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Server ip -&gt; "</span> <span class="o">&lt;&lt;</span> <span class="n">ip</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Server port -&gt; "</span> <span class="o">&lt;&lt;</span> <span class="n">port</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">bind</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">server_addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">server_addr</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="c1">//소켓 서버 바인딩</span>
+    <span class="p">{</span>
+        <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Bind ERROR"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span><span class="c1">//연결이 부정확할 경우 종료</span>
+        <span class="c1">//sock_receive="Quit";</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">listen</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Listen ERROR"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span><span class="c1">// 소켓연결을 할수 있도록 열음 </span>
+        <span class="c1">//sock_receive="Quit";</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Wait...</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+    <span class="n">client_addr_len</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">client_addr</span><span class="p">);</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">client_addr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">client_addr_len</span><span class="p">);</span><span class="c1">//클라이언트가 연결될때까지 기다힘</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Connection from: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">inet_ntoa</span><span class="p">(</span><span class="n">client_addr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">));</span>
+    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFF_SIZE</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="n">runServer</span><span class="p">();</span><span class="c1">//서버 시작</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">Server</span><span class="o">::</span><span class="n">runServer</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kr">thread</span> <span class="n">inputCMD</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](){</span> <span class="n">keyboardInput</span><span class="p">();</span> <span class="p">});</span><span class="c1">//키보드 입력쓰레드</span>
+    <span class="kr">thread</span> <span class="n">sockReceive</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](){</span> <span class="n">receiving</span><span class="p">();</span> <span class="p">});</span><span class="c1">//클라이언트에서 받는 쓰레드</span>
+    <span class="kr">thread</span> <span class="n">sockSend</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](){</span> <span class="n">sending</span><span class="p">();</span> <span class="p">});</span><span class="c1">//클라이언트로 보내는 쓰레드</span>
+    <span class="c1">//각자 메인쓰레드와 따로 놈</span>
+    <span class="n">sockReceive</span><span class="p">.</span><span class="n">detach</span><span class="p">();</span>
+    <span class="n">inputCMD</span><span class="p">.</span><span class="n">detach</span><span class="p">();</span>
+    <span class="n">sockSend</span><span class="p">.</span><span class="n">detach</span><span class="p">();</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">msgReceive</span><span class="p">;</span><span class="c1">//받은 메세지 출력</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="kt">int</span><span class="p">(</span><span class="n">CMD</span><span class="p">))</span>
+        <span class="p">{</span>
+        <span class="c1">// 키보드 입력에 따라 다르게 출력되는 값을 보여주기 위해서 만든 스위치 케이스문이다.</span>
+        <span class="k">case</span> <span class="mi">119</span><span class="p">:</span>
+            <span class="c1">//CMD=w</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"go</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+            <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="mi">115</span><span class="p">:</span>
+            <span class="c1">//CMD=s</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"back</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+            <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="mi">87</span><span class="p">:</span>
+            <span class="c1">//CMD=W</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"GO</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+            <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="mi">83</span><span class="p">:</span>
+            <span class="c1">//CMD=S</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"BACK</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+            <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="mi">97</span><span class="p">:</span>
+            <span class="c1">//CMD=a</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"chage roll - direction </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+            <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="c1">//CMD=d</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"chage roll + direction </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+            <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="mi">106</span><span class="p">:</span>
+            <span class="c1">//CMD=j</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"chage yaw  +15 degree direction </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="mi">107</span><span class="p">:</span>
+            <span class="c1">//CMD=k</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"chage yaw  -15 degree direction </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+
+        <span class="k">case</span> <span class="mi">113</span><span class="p">:</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"stop"</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+
+        <span class="nl">default:</span>
+            <span class="c1">//cout&lt;&lt; "Wrong OR EMPTY CMD\n";</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">CMD</span> <span class="o">!=</span> <span class="sc">'q'</span><span class="p">);</span><span class="c1">//키보드에서 입력값이 q일경우 서버를 종료한다.</span>
+    <span class="n">stopServer</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Server</span><span class="o">::</span><span class="n">receiving</span><span class="p">()</span><span class="c1">//소켓에서 데이터를 받는 함수 </span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFF_SIZE</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="c1">// stringstream ss;</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+        <span class="n">read</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">BUFF_SIZE</span><span class="p">);</span>
+        <span class="n">msgReceive</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">msgReceive</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,};</span>
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">CMD</span> <span class="o">!=</span> <span class="sc">'q'</span><span class="p">);</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Server</span><span class="o">::</span><span class="n">sending</span><span class="p">()</span><span class="c1">//서버에서 보내는 함수</span>
+<span class="p">{</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+        <span class="c1">//penR,penL,IDU,tilt</span>
+        <span class="n">msgSend</span> <span class="o">=</span> <span class="n">to_string</span><span class="p">(</span><span class="n">CMD</span><span class="p">)</span><span class="o">+</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+        <span class="n">send</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">msgSend</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">msgSend</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">CMD</span> <span class="o">!=</span> <span class="sc">'q'</span><span class="p">);</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Server</span><span class="o">::</span><span class="n">keyboardInput</span><span class="p">()</span><span class="c1">//키보드 인풋에 대한 함수 q를 입력받으면 종료</span>
+<span class="p">{</span>
+    <span class="c1">//KEBOARD INPUT</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">CMD</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">CMD</span> <span class="o">!=</span> <span class="sc">'q'</span><span class="p">);</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">Server</span><span class="o">::</span><span class="n">stopServer</span><span class="p">()</span><span class="c1">//종료 함수</span>
+<span class="p">{</span>
+    <span class="n">msgSend</span> <span class="o">=</span> <span class="s">"q"</span><span class="p">;</span>
+    <span class="n">send</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">msgSend</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">msgSend</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"[stop server]</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">client</span><span class="p">);</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">server</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"OFF"</span><span class="p">;</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>지금은 클라이언트에서 0만 보내고 서버에서는 키보드 입력값만 보내고 있는 데 필요하다면 이를 수정하여 다른 방향을 사용 가능하다.</p>
+<h2 id="maincpp-1">main.cpp</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;server.h&gt;
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">Server</span> <span class="n">ser</span><span class="p">(</span><span class="s">"127.0.0.1"</span><span class="p">,</span><span class="mi">13000</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>지금 내가 진행하는 프로젝트에서는 thread를 이용하여 키보드입력과 소켓 통신이 별도로 구현되야 할 필요가 있고 이를 토대로 통신과 명령전달을 동시에 진행하고 있다.</p>
+
+          </section>
+
+          
+<!-- Share Buttons Start -->
+<div>
+  <ul class="rrssb-buttons clearfix">
+    
+      <li class="rrssb-email">
+        <a href="mailto:?subject=Socket Communication for Linux[ubuntu] {C++}&body=https://SnovvyOwl.github.io/khu-kongbot/2021/08/25/Socket-Communication.html" data-proofer-ignore>
+          <span class="rrssb-icon">
+            <svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+              <path d="M20.11 26.147c-2.335 1.05-4.36 1.4-7.124 1.4C6.524 27.548.84 22.916.84 15.284.84 7.343 6.602.45 15.4.45c6.854 0 11.8 4.7 11.8 11.252 0 5.684-3.193 9.265-7.398 9.3-1.83 0-3.153-.934-3.347-2.997h-.077c-1.208 1.986-2.96 2.997-5.023 2.997-2.532 0-4.36-1.868-4.36-5.062 0-4.75 3.503-9.07 9.11-9.07 1.713 0 3.7.4 4.6.972l-1.17 7.203c-.387 2.298-.115 3.3 1 3.4 1.674 0 3.774-2.102 3.774-6.58 0-5.06-3.27-8.994-9.304-8.994C9.05 2.87 3.83 7.545 3.83 14.97c0 6.5 4.2 10.2 10 10.202 1.987 0 4.09-.43 5.647-1.245l.634 2.22zM16.647 10.1c-.31-.078-.7-.155-1.207-.155-2.572 0-4.596 2.53-4.596 5.53 0 1.5.7 2.4 1.9 2.4 1.44 0 2.96-1.83 3.31-4.088l.592-3.72z"
+              />
+            </svg>
+          </span>
+          <span class="rrssb-text">email</span>
+        </a>
+      </li>
+    
+    
+      <li class="rrssb-facebook">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://SnovvyOwl.github.io/khu-kongbot/2021/08/25/Socket-Communication.html&title=Socket Communication for Linux[ubuntu] {C++}" class="popup">
+          <span class="rrssb-icon">
+            <svg xmlns="https://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" width="29" height="29" viewBox="0 0 29 29"><path d="M26.4 0H2.6C1.714 0 0 1.715 0 2.6v23.8c0 .884 1.715 2.6 2.6 2.6h12.393V17.988h-3.996v-3.98h3.997v-3.062c0-3.746 2.835-5.97 6.177-5.97 1.6 0 2.444.173 2.845.226v3.792H21.18c-1.817 0-2.156.9-2.156 2.168v2.847h5.045l-.66 3.978h-4.386V29H26.4c.884 0 2.6-1.716 2.6-2.6V2.6c0-.885-1.716-2.6-2.6-2.6z"
+              class="cls-2" fill-rule="evenodd"/></svg>
+          </span>
+          <span class="rrssb-text">facebook</span>
+        </a>
+      </li>
+    
+    
+      <li class="rrssb-twitter">
+        <a href="https://twitter.com/share?url=https://SnovvyOwl.github.io/khu-kongbot/2021/08/25/Socket-Communication.html&text=Socket Communication for Linux[ubuntu] {C++}"
+        class="popup">
+          <span class="rrssb-icon"><svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><path d="M24.253 8.756C24.69 17.08 18.297 24.182 9.97 24.62c-3.122.162-6.22-.646-8.86-2.32 2.702.18 5.375-.648 7.507-2.32-2.072-.248-3.818-1.662-4.49-3.64.802.13 1.62.077 2.4-.154-2.482-.466-4.312-2.586-4.412-5.11.688.276 1.426.408 2.168.387-2.135-1.65-2.73-4.62-1.394-6.965C5.574 7.816 9.54 9.84 13.802 10.07c-.842-2.738.694-5.64 3.434-6.48 2.018-.624 4.212.043 5.546 1.682 1.186-.213 2.318-.662 3.33-1.317-.386 1.256-1.248 2.312-2.4 2.942 1.048-.106 2.07-.394 3.02-.85-.458 1.182-1.343 2.15-2.48 2.71z"/></svg></span>
+          <span class="rrssb-text">twitter</span>
+        </a>
+      </li>
+    
+    
+      <li class="rrssb-linkedin">
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://SnovvyOwl.github.io/khu-kongbot/2021/08/25/Socket-Communication.html" class="popup">
+        <span class="rrssb-icon">
+          <svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+            <path d="M25.424 15.887v8.447h-4.896v-7.882c0-1.98-.71-3.33-2.48-3.33-1.354 0-2.158.91-2.514 1.802-.13.315-.162.753-.162 1.194v8.216h-4.9s.067-13.35 0-14.73h4.9v2.087c-.01.017-.023.033-.033.05h.032v-.05c.65-1.002 1.812-2.435 4.414-2.435 3.222 0 5.638 2.106 5.638 6.632zM5.348 2.5c-1.676 0-2.772 1.093-2.772 2.54 0 1.42 1.066 2.538 2.717 2.546h.032c1.71 0 2.77-1.132 2.77-2.546C8.056 3.593 7.02 2.5 5.344 2.5h.005zm-2.48 21.834h4.896V9.604H2.867v14.73z"
+            />
+          </svg>
+        </span>
+        <span class="rrssb-text">linkedin</span>
+      </a>
+      </li>
+    
+    
+      <li class="rrssb-reddit">
+        <a href="https://www.reddit.com/submit?url=https://SnovvyOwl.github.io/khu-kongbot/2021/08/25/Socket-Communication.html&title=Socket Communication for Linux[ubuntu] {C++}" target="_blank">
+          <span class="rrssb-icon">
+            <svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+              <path d="M11.794 15.316c0-1.03-.835-1.895-1.866-1.895-1.03 0-1.893.866-1.893 1.896s.863 1.9 1.9 1.9c1.023-.016 1.865-.916 1.865-1.9zM18.1 13.422c-1.03 0-1.895.864-1.895 1.895 0 1 .9 1.9 1.9 1.865 1.03 0 1.87-.836 1.87-1.865-.006-1.017-.875-1.917-1.875-1.895zM17.527 19.79c-.678.68-1.826 1.007-3.514 1.007h-.03c-1.686 0-2.834-.328-3.51-1.005-.264-.265-.693-.265-.958 0-.264.265-.264.7 0 1 .943.9 2.4 1.4 4.5 1.402.005 0 0 0 0 0 .005 0 0 0 0 0 2.066 0 3.527-.46 4.47-1.402.265-.264.265-.693.002-.958-.267-.334-.688-.334-.988-.043z"
+              />
+              <path d="M27.707 13.267c0-1.785-1.453-3.237-3.236-3.237-.792 0-1.517.287-2.08.76-2.04-1.294-4.647-2.068-7.44-2.218l1.484-4.69 4.062.955c.07 1.4 1.3 2.6 2.7 2.555 1.488 0 2.695-1.208 2.695-2.695C25.88 3.2 24.7 2 23.2 2c-1.06 0-1.98.616-2.42 1.508l-4.633-1.09c-.344-.082-.693.117-.803.454l-1.793 5.7C10.55 8.6 7.7 9.4 5.6 10.75c-.594-.45-1.3-.75-2.1-.72-1.785 0-3.237 1.45-3.237 3.2 0 1.1.6 2.1 1.4 2.69-.04.27-.06.55-.06.83 0 2.3 1.3 4.4 3.7 5.9 2.298 1.5 5.3 2.3 8.6 2.325 3.227 0 6.27-.825 8.57-2.325 2.387-1.56 3.7-3.66 3.7-5.917 0-.26-.016-.514-.05-.768.965-.465 1.577-1.565 1.577-2.698zm-4.52-9.912c.74 0 1.3.6 1.3 1.3 0 .738-.6 1.34-1.34 1.34s-1.343-.602-1.343-1.34c.04-.655.596-1.255 1.396-1.3zM1.646 13.3c0-1.038.845-1.882 1.883-1.882.31 0 .6.1.9.21-1.05.867-1.813 1.86-2.26 2.9-.338-.328-.57-.728-.57-1.26zm20.126 8.27c-2.082 1.357-4.863 2.105-7.83 2.105-2.968 0-5.748-.748-7.83-2.105-1.99-1.3-3.087-3-3.087-4.782 0-1.784 1.097-3.484 3.088-4.784 2.08-1.358 4.86-2.106 7.828-2.106 2.967 0 5.7.7 7.8 2.106 1.99 1.3 3.1 3 3.1 4.784C24.86 18.6 23.8 20.3 21.8 21.57zm4.014-6.97c-.432-1.084-1.19-2.095-2.244-2.977.273-.156.59-.245.928-.245 1.036 0 1.9.8 1.9 1.9-.016.522-.27 1.022-.57 1.327z"
+              />
+            </svg>
+          </span>
+          <span class="rrssb-text">reddit</span>
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+<!-- Share Buttons End -->
+
+
+          
+
+
+          <hr />
+
+          
+          <div class="author row">
+            <img class="col-xs-4 col-sm-3 col-md-2" src="/img/author.jpg" alt="Me" />
+            <p class="col-xs-8 col-sm-9 col-md-10">
+              Seongwon Lee
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Start -->
+
+<footer>
+
+    <!-- Social Buttons Start -->
+
+<ul class="list-inline social-buttons">
+    
+    
+        
+        <li><a href="https://instagram.com/S.nowyo.W.L" target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
+        
+    
+    
+        
+        <li><a href="https://github.com/SnovvyOwl" target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+        
+    
+    
+        
+        <li><a href="https://blog.naver.com/owl0614" target="_blank"><i class="ri-pages-line"></i></a></li>
+        
+    
+    
+</ul>
+
+<!-- Social Buttons End -->
+
+
+    <p><br><br></p>
+
+    <div class="container text-center">
+        <p>Copyright &copy; Seongwon Lee 2021</p>
+        
+    </div>
+</footer>
+
+<p></p>
+
+<!-- Footer End -->
+
+
+    
+<!-- Javascript Start -->
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<!--* Start Bootstrap - Grayscale Bootstrap Theme (http://startbootstrap.com)
+* Code licensed under the Apache License v2.0.
+* For details, see http://www.apache.org/licenses/LICENSE-2.0.-->
+<script>
+function toggleNavCollapse(){50<$(".navbar").offset().top?$(".navbar-fixed-top").addClass("top-nav-collapse"):$(".navbar-fixed-top").removeClass("top-nav-collapse");}
+$(document).ready(toggleNavCollapse);
+$(window).scroll(toggleNavCollapse);$(function(){$("a.page-scroll").bind("click",function(b){var a=$(this);$("html, body").stop().animate({scrollTop:$(a.attr("href")).offset().top-50},1500,"easeInOutExpo",function(){a.blur()});b.preventDefault()})});$(".navbar-collapse ul li a").click(function(){$(".navbar-toggle:visible").click()});
+</script>
+
+
+
+
+
+  <!-- Syntax highlight in post pages-->
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+  <!-- Share buttons Start -->
+
+  <script src="/js/rrssb.min.js"></script>
+
+  <!-- Share buttons End -->
+
+
+
+
+
+<script>
+function addTohistory() {
+  if (!window.location.host.startsWith("127.0.0.1")) {
+    history.pushState({}, 'Socket Communication for Linux[ubuntu] {C++}', 'https://SnovvyOwl.github.io/khu-kongbot/2021/08/25/Socket-Communication.html');
+  }
+}
+</script>
+
+<!-- Gesture Navigation / Swipe Instruction Start -->
+
+
+<!-- Javascript End -->
+
+
+  </body>
+</html>
+
+<!-- Post Layout End -->

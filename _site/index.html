@@ -30,6 +30,7 @@
   
 
   <!-- Custom Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
   <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -198,6 +199,10 @@ If you want to have a static message in your intro layout, disable the dynamic-t
         
       
         
+      
+        
+      
+        
           
 <!-- profile Start -->
 
@@ -207,7 +212,7 @@ If you want to have a static message in your intro layout, disable the dynamic-t
       <h2 id="profile">profile</h2>
 <p>Seongwon Lee, 이성원</p>
 
-<p>Department of Mechanical Engineering &amp; Software Convergence, Kyung Hee Univ. (leave of absence)</p>
+<p>Department of Mechanical Engineering &amp; Software Convergence, Kyung Hee Univ.</p>
 
 <p>The programming languages I can use are C++, python, C and Matlab.</p>
 
@@ -254,6 +259,10 @@ If you want to have a static message in your intro layout, disable the dynamic-t
         
       
         
+      
+        
+      
+        
           
 <!-- Latest Post Preview Start -->
 
@@ -265,18 +274,18 @@ If you want to have a static message in your intro layout, disable the dynamic-t
 
 
         
-        <h4> <strong> 12 Mar 2020 </strong>
+        <h4> <strong> 25 Aug 2021 </strong>
           <small>.
             <a class="category" href="/categories/khu-kongbot.html">
               KHU-KongBot
             </a>
           .</small>
-          <strong> <a href="/khu-kongbot/2020/03/12/Raspberry-PI-with-C++.html">Using C++ for MultiThread processing </a> </strong>
-          <small> <a href="/khu-kongbot/2020/03/12/Raspberry-PI-with-C++.html#disqus_thread">Comments</a></small>
+          <strong> <a href="/khu-kongbot/2021/08/25/Socket-Communication.html">Socket Communication for Linux[ubuntu] {C++} </a> </strong>
+          <small> <a href="/khu-kongbot/2021/08/25/Socket-Communication.html#disqus_thread">Comments</a></small>
         </h4>
 
         <section class="text-justify">
-          <p>요즘 개인적으로 라즈베리파이로 학부 졸업논문으로 만들었던 공 로봇을 다시 처음부터 만들어서 제대로 만들어보려고 하고 있다,</p> <p>그런데 로봇이 완전히 스스로 판단하는 것이 아닌 조종을 사람이 해줘야한다.</p> <p>만약 키보드로 입력을 받아서 이를 사용하게 되는 코드를 짜서 사용하게 되면 입력이 끝나기 전까지는 다음 줄로 넘어가지 않는다. 즉</p> <p>계속 백그라운드로 진행되어야 하는 로봇의 자세 제어, 센서 데이터 읽기 등이 작동을 하지 않게 되어 제어를 할수 없게된다.</p> <p>따라서 이를 해결하기 위해서 제시하는 방법은 명령어만 입력받는 스레드를 만드는 것이다.</p> <p>그것을 하기 앞서서 스레드를 간략히 설명하겠다.</p> <p>스레드는 같은 프로세스내에서 병렬로 계산할수 있게끔 만들어주는 것이다. 스레드는 같은 프로세스 내에서 동작하기 때문에 메모리를 공유하게 된다.</p>...
+          <p>KHU-Kongbot2 Project를 진행하면서 객체지향적 요소를 왠만하면 넣지 않을라고 했다. 이유는 함께하는 기계과 친구들이 객체지향보다 절차지향적인 코드에 익숙했기 때문이다.</p> <p>하지만 계속 진행하다보니 코드가 점점 꼬였다.</p> <p>실제로 각각의 요소별로 같은 코드로 묶이는 것들도 많았고 요소별로 다른 함수를 작성하고 변수를 일일이 설정해줘야해서 코드가 복잡해지다보니 알아보기도 힘들고 코드길이가 많이 길어졌다.</p> <p>따라서 이를 해결하기 위해 프로그램을 절차지향에서 객체지향으로 다시 짜기로 마음 먹었다.</p> <p>또한 객체지향으로 바꾸면서 기존의 로봇의 현재의 state를 계산하고 이에 따른 제어 input을 계산하는 헤더파일을 만들었다.</p> <p>만들어진 헤더파일의 크기와 계산양을 보니 라즈베리파이4에서 이를 계산하고 시리얼통신을 통해 아두이노로 내려주는 것까지 하기엔 너무 리소스가 모잘라 보였다.</p> <p>결국이 제어 입력과 현재의 상태를 계산하는...
         </section>
 
         <h4><a href="/blog/">Archive</a></h4>
@@ -302,6 +311,10 @@ If you want to have a static message in your intro layout, disable the dynamic-t
         
       
     
+      
+        
+      
+        
       
         
       
@@ -403,7 +416,7 @@ If you want to have a static message in your intro layout, disable the dynamic-t
                 <h4>July 2017 ~ March 2019</h4>
               </div>
               <div class="timeline-body">
-                <p>Participating researcher at Yonsei University, Project called ‘Development of Ion Wind Engine that Maximizes Removal of Fine Dust’</p>
+                <p>Participating researcher at Yonsei University, Project called ‘Development of Ioninc Wind Engine that Maximizes Removal of Fine Dust’</p>
 
               </div>
             </div>
@@ -451,6 +464,10 @@ If you want to have a static message in your intro layout, disable the dynamic-t
         
       
     
+      
+        
+      
+        
       
         
       
@@ -538,13 +555,20 @@ If you want to have a static message in your intro layout, disable the dynamic-t
 
 <ul class="list-inline social-buttons">
     
-    <li><a href="https://instagram.com/S.nowyo.W.L" target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
     
-    <li><a href="https://github.com/SnovvyOwl" target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+        
+        <li><a href="https://instagram.com/S.nowyo.W.L" target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
+        
     
-    <li><a href="https://snowy0wl.tistory.com/" target="_blank"><i class="fa fa-tistory fa-fw"></i></a></li>
     
-    <li><a href="https://blog.naver.com/owl0614" target="_blank"><i class="fa fa-pied-piper-hat fa-fw"></i></a></li>
+        
+        <li><a href="https://github.com/SnovvyOwl" target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+        
+    
+    
+        
+        <li><a href="https://blog.naver.com/owl0614" target="_blank"><i class="ri-pages-line"></i></a></li>
+        
     
     
 </ul>
@@ -555,7 +579,7 @@ If you want to have a static message in your intro layout, disable the dynamic-t
     <p><br><br></p>
 
     <div class="container text-center">
-        <p>Copyright &copy; Seongwon Lee 2020</p>
+        <p>Copyright &copy; Seongwon Lee 2021</p>
         
     </div>
 </footer>
@@ -660,24 +684,12 @@ $(window).scroll(toggleNavCollapse);$(function(){$("a.page-scroll").bind("click"
 <script>
 function addTohistory() {
   if (!window.location.host.startsWith("127.0.0.1")) {
-    history.pushState({}, '', 'http://localhost:4000/');
+    history.pushState({}, '', 'https://SnovvyOwl.github.io/');
   }
 }
 </script>
 
 <!-- Gesture Navigation / Swipe Instruction Start -->
-
-
-  
-
-  
-
-  
-
-  
-
-<!-- Gesture Navigation / Swipe Instruction End -->
-
 
 
 <!-- Javascript End -->

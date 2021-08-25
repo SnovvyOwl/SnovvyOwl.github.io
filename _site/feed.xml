@@ -3,8 +3,32 @@
 	<channel>
 		<title>{SnowyOwl}</title>
 		<description>Blog and website of SnowyOwl, blogging mainly for Embedded System, Robotics, Dynamics modeling, Control Theory, Computer Vistion, ML, DL and RL Opinions expressed are mine.</description>
-		<link>http://localhost:4000</link>
-		<atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+		<link>https://SnovvyOwl.github.io</link>
+		<atom:link href="https://SnovvyOwl.github.io/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>Socket Communication for Linux[ubuntu] {C++}</title>
+				
+				
+					<description>&lt;p&gt;KHU-Kongbot2 Project를 진행하면서 객체지향적 요소를 왠만하면 넣지 않을라고 했다. 이유는 함께하는 기계과 친구들이 객체지향보다 절차지향적인 코드에 익숙했기 때문이다.&lt;/p&gt;
+</description>
+				
+				<pubDate>Wed, 25 Aug 2021 00:00:00 +0900</pubDate>
+				<link>https://SnovvyOwl.github.io/khu-kongbot/2021/08/25/Socket-Communication.html</link>
+				<guid isPermaLink="true">https://SnovvyOwl.github.io/khu-kongbot/2021/08/25/Socket-Communication.html</guid>
+			</item>
+		
+			<item>
+				<title>Encoder sensing Code with RPi</title>
+				
+				
+					<description>&lt;p&gt;[C/C++] 라즈베리파이로 엔코더의 각도측정 및 각속도 계산  Raspberry Pi&lt;/p&gt;
+</description>
+				
+				<pubDate>Fri, 01 May 2020 00:00:00 +0900</pubDate>
+				<link>https://SnovvyOwl.github.io/khu-kongbot/2020/05/01/encoder-reading.html</link>
+				<guid isPermaLink="true">https://SnovvyOwl.github.io/khu-kongbot/2020/05/01/encoder-reading.html</guid>
+			</item>
 		
 			<item>
 				<title>Using C++ for MultiThread processing</title>
@@ -13,9 +37,9 @@
 					<description>&lt;p&gt;요즘 개인적으로 라즈베리파이로 학부 졸업논문으로 만들었던 공 로봇을 다시 처음부터 만들어서 제대로 만들어보려고 하고 있다,&lt;/p&gt;
 </description>
 				
-				<pubDate>Thu, 12 Mar 2020 00:00:00 +0900</pubDate>
-				<link>http://localhost:4000/khu-kongbot/2020/03/12/Raspberry-PI-with-C++.html</link>
-				<guid isPermaLink="true">http://localhost:4000/khu-kongbot/2020/03/12/Raspberry-PI-with-C++.html</guid>
+				<pubDate>Tue, 24 Mar 2020 00:00:00 +0900</pubDate>
+				<link>https://SnovvyOwl.github.io/khu-kongbot/2020/03/24/Raspberry-PI-with-C++.html</link>
+				<guid isPermaLink="true">https://SnovvyOwl.github.io/khu-kongbot/2020/03/24/Raspberry-PI-with-C++.html</guid>
 			</item>
 		
 	</channel>
