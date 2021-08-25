@@ -3,7 +3,7 @@ layout: post
 section-type: post
 title: Encoder sensing Code with RPi
 category: KHU-KongBot
-tags: [ 'RaspberryPi' ]
+tags: [ 'RaspberryPi' ,'c++']
 ---
 
 [C/C++] 라즈베리파이로 엔코더의 각도측정 및 각속도 계산  Raspberry Pi
