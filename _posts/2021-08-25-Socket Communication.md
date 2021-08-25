@@ -122,9 +122,59 @@ void Client::receive_send(){
 여기서 read()와 send()는 정의에 따라 cstring 형태로 데이터를 주고 받는다 따라서 익숙한 string 형태를 쓰기 위해 보낼때는 받은 문자열 배열을 string 멤버 변수에 저장을 한다.
 
 그리고 보낼때는 string을 .c_str()과 같은 메서드로  변환해서 보내준다.
+## main.cpp
+```c
+#include<client.h>
+int main(){
+    Client client("127.0.0.1",13000);
+    return 0;
+}
+
+```
+
 
 이제 server쪽을 알아보도록 하자.
 
 # Server
+## server.h
+```c
+    #pragma once
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <thread>
+#include <netdb.h>
+#define BUFF_SIZE 8
+using namespace std;
+
+class Server
+{    
+    private:
+        char *ip;
+        int port = 13000;
+        int server = 0;
+        int client = 0;
+        struct sockaddr_in client_addr;
+        struct sockaddr_in server_addr;
+        char CMD;
+        socklen_t client_addr_len = sizeof(client_addr);
+        string msgReceive = "";
+        string msgSend = "";
+
+    public:
+        Server(const char *_ip, int _port);
+        void startServer();
+        void runServer();
+        void receiving();
+        void sending();
+        void keyboardInput();
+        void stopServer();
+};
+```
+
+
 
  
