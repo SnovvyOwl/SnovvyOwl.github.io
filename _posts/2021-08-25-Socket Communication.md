@@ -339,7 +339,7 @@ void Server::stopServer()//종료 함수
 ```
 
 지금은 클라이언트에서 0만 보내고 서버에서는 키보드 입력값만 보내고 있는 데 필요하다면 이를 수정하여 다른 방향을 사용 가능하다.
-
+## main.cpp
 ```c
 #include<server.h>
 int main(){
