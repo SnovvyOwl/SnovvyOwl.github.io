@@ -3,7 +3,7 @@ layout: post
 section-type: post
 title: Using C++ for MultiThread processing 
 category: KHU-KongBot
-tags: [ 'RaspberryPi' ]
+tags: [ 'RaspberryPi' ,'c++']
 ---
 요즘 개인적으로 라즈베리파이로 학부 졸업논문으로 만들었던 공 로봇을 다시 처음부터 만들어서 제대로 만들어보려고 하고 있다,
 
