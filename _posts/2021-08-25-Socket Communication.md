@@ -1,9 +1,20 @@
 ---
 layout: post
 section-type: post
-title: Socket Communication between Linux Computer and Raspberry Pi 
+title: Socket Communication between Linux Computer and Raspberry Pi {C++}
 category: KHU-KongBot
 tags: [ 'Socket Communication','RaspberryPI']
 ---
 
+KHU-Kongbot2 Project를 진행하면서 객체지향적 요소를 왠만하면 넣지 않을라고 했다. 이유는 함께하는 기계과 친구들이 객체지향보다 절차지향적인 코드에 익숙했기 때문이다.
+하지만 계속 진행하다보니 코드가 점점 꼬였다. 
+실제로 각각의 요소별로 같은 코드로 묶이는 것들도 많았고 요소별로 다른 함수를 작성하고 변수를 일일이 설정해줘야해서 코드가 복잡해지다보니 알아보기도 힘들고 코드길이가 많이 길어졌다.
+따라서 이를 해결하기 위해 프로그램을 절차지향에서 객체지향으로 다시 짜기로 마음 먹었다.
+또한 객체지향으로 바꾸면서 기존의 로봇의 현재의 state를 계산하고 이에 따른 제어 input을 계산하는 헤더파일을 만들었다.
+만들어진 헤더파일의 크기와 계산양을 보니 라즈베리파이4에서 이를 계산하고 시리얼통신을 통해 아두이노로 내려주는 것까지 하기엔 너무 리소스가 모잘라 보였다.
+결국이 제어 입력과 현재의 상태를 계산하는 코드를 서버에서 돌리기로 했고  라즈베리파이4와는 소켓통신으로 연결해주기로 하였다.
+리소스를 생각하기 때문에 모든 코드는 C++로 작성하는 중이었으니 이를 유지하기로 했다.
+
+먼저 클라이언트인 라즈베리파이에서의 코드이다. 
+클라이언트인 라즈베리파이는 센서에서 데이터를 직접 받는 컴퓨터이고 연결된 센서는 E2box EBIMU 9 DOF v4(이하 AHRS)와 Autonomics E50S8-3600-3-T-5(이하 Encoder[엔코더])
  
