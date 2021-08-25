@@ -28,7 +28,7 @@ KHU-Kongbot2 Project를 진행하면서 객체지향적 요소를 왠만하면 �
 # Client
 ## client.h
 
-<pre><code data-trim class="yml">
+```c
 #pragma once
 #include<iostream>
 #include<string.h>
@@ -51,29 +51,28 @@ class Client{
         void runClient();//client시작 
         void receive_send();//서버와 주고 받는 쓰레드
 };
-</code></pre>
+```
 
 여기서 중요한 Keypoint는 hostent 이다.
 
 보통 서버의 주소로는 Const char* 를 사용하는데 이 경우 서버가 "127.0.0.1"과 같은 직접적인 IPv4주소를 아래와 같게 직접 써준다.
-
-<pre><code>
+```c
 server_addr.sin_addr.s_addr=inet_addr("127.0.0.1");
-</code></pre>
+```
 
 하지만 이경우 서버의 주소가 "https://snovvyowl.github.io"와 같은경우는 대처할 수가 없다 따라서 이를 hostent 구조체를 써서 해결한다.
 
-<pre><code >
+```c
 struct hostent *he; //헤더에 정의함
 he=gethostbyname(hostname);//생성자에 정의함
 server_addr.sin_addr.s_addr=*(long*)(he->h_addr_list[0]);//생성자에 정의함
-</code></pre>
+```
 
 이렇게 하면 문제가 되는 서버의 주소도 처리가 가능해진다.
 
 ## client.cpp
 
-<pre><code>
+```c
 #include<client.h>
 using namespace std;
 #define BUFF_SIZE 8
@@ -118,10 +117,14 @@ void Client::receive_send(){
         buffer[0]={0,};//버퍼 초기화
     } while ( msgReceive != "q");
 }
-</code></pre>
+```
 
 여기서 read()와 send()는 정의에 따라 cstring 형태로 데이터를 주고 받는다 따라서 익숙한 string 형태를 쓰기 위해 보낼때는 받은 문자열 배열을 string 멤버 변수에 저장을 한다.
 
 그리고 보낼때는 string을 .c_str()과 같은 메서드로  변환해서 보내준다.
+
+이제 server쪽을 알아보도록 하자.
+
+# Server
 
  
