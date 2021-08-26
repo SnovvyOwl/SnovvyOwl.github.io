@@ -22,10 +22,10 @@ $ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\parti
 보존계에서는 $ Q = 0$ 이므로 라그랑주 방정식은 아래와 같다.\
 $ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=0  $ \
 $L$은 각 바디별로 운동에너지에서 위치에너지를 뺀 식이다.\
-$q$는 자유도(독립적인 좌표)라고 보면 된다.\ 
+$q$는 자유도(독립적인 좌표)라고 보면 된다.
 
 
-KHU-kongbot에 에너지항을 구해보자 \
+KHU-kongbot에 에너지항을 구해보자
 ## Energy Term
 ![RobotSystem](/img/lagrangeanalysis.jpg )
 본 그림은 로봇의 시스템을 간략하게 그린 그림이다.\
@@ -63,10 +63,10 @@ $g$ = gravity accelation (scala)\
 $l_{p}$ = length of pendulums C.M to rotational Axis\
 $\theta_{s}$ = angle of Shell (Global Frame)\
 $\theta_{p}$ =angle of pendulums (Global Frame)\
-$r_{pm}= length of Motor Axis to Center of Shell\
+$r_{pm}= length of Motor Axis to Center of Shell
 
 먼저  Body 1인 Shell의 운동에너지를 구해보자\
-로봇은 $R_{s}\dot{\theta_{s}}$의 속도로 전진하고 있다.\
+로봇은 $R_{s}\dot{\theta_{s}}$의 속도로 전진하고 있다.
 
 
 ## Shell
@@ -176,4 +176,4 @@ print(latex(simplify(LM.form_lagranges_equations())))
 $\left[\begin{matrix}1.0 \left(J_{s} + R_{s}^{2} m_{i} + R_{s}^{2} m_{p} + R_{s}^{2} m_{s}\right) \frac{d^{2}}{d t^{2}} \theta_{s}{\left(t \right)}\\1.0 J_{p} \frac{d^{2}}{d t^{2}} \theta_{p}{\left(t \right)} + g l_{p} m_{p} \sin{\left(\theta_{p}{\left(t \right)} \right)}\end{matrix}\right]$
 
 
-이렇게 모든 결과가 계산되서 나온다.cvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvb
+이렇게 모든 결과가 계산되서 나온다.
