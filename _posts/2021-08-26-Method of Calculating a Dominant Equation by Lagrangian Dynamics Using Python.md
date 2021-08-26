@@ -1,7 +1,7 @@
 ---
 layout: post
 section-type: post
-title: Method of Calculating a Dominant Equation by Lagrangian Dynamics Using Python
+title: Method of Calculating a Governing  Equation by Lagrangian Dynamics Using Python
 category: Dynamics and Control
 tags: [ 'python']
 ---
