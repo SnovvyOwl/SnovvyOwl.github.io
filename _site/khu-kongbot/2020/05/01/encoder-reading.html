@@ -250,144 +250,135 @@ uint32_t controlPeriod = 20
 
 <p>둘다 발생한것을 체크하는 INT_EDGE_BOTH​﻿ 가 있다.</p>
 
-<pre><code data-trim="" class="yml">
-이번에는 INT_EDGE_BOTH를 이용하여 둘다 측정하는 것으로 하였다.
+<p>이번에는 INT_EDGE_BOTH를 이용하여 둘다 측정하는 것으로 하였다.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wiringPiISR</span><span class="p">(</span><span class="n">PhaseA</span><span class="p">,</span> <span class="n">INT_EDGE_BOTH</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Interrupt_A</span><span class="p">);</span>
+<span class="n">wiringPiISR</span><span class="p">(</span><span class="n">PhaseB</span><span class="p">,</span> <span class="n">INT_EDGE_BOTH</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Interrupt_B</span><span class="p">);</span>
+</code></pre></div></div>
 
-wiringPiISR(PhaseA, INT_EDGE_BOTH, &amp;Interrupt_A);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">Interrupt_A</span><span class="p">();</span>
+<span class="kt">void</span> <span class="nf">Interrupt_B</span><span class="p">();</span>
+<span class="err">```</span><span class="n">c</span>
+<span class="err">는</span> <span class="err">인터럽트가</span> <span class="err">발생하면</span> <span class="err">구동되는</span> <span class="err">함수이다</span><span class="p">.</span> <span class="err">상의</span> <span class="err">변화에</span> <span class="err">따라</span> <span class="err">회전각을</span> <span class="err">측정한다</span><span class="p">.</span>
 
-wiringPiISR(PhaseB, INT_EDGE_BOTH, &amp;Interrupt_B);
-</code></pre>
 
-<pre><code data-trim="" class="yml">
-void Interrupt_A();
 
-void Interrupt_B();
-</code></pre>
-<p>는 인터럽트가 발생하면 구동되는 함수이다. 상의 변화에 따라 회전각을 측정한다.</p>
+<span class="mi">20</span><span class="n">ms</span> <span class="err">동안</span> <span class="err">발생한</span> <span class="err">회전각을</span> <span class="err">이용해</span> <span class="err">각속도를</span> <span class="err">구하는</span> <span class="err">부분이다</span><span class="p">.</span>
 
-<p>20ms 동안 발생한 회전각을 이용해 각속도를 구하는 부분이다.</p>
-
-<pre><code data-trim="" class="yml">
- now = past = millis();
- float anglePast = angle;
- float angleNow = angle;
- while(1){
-  if((now-past)&gt;controlPeriod){
-   angleNow =angle;
-   vel = (angleNow-anglePast)/(now-past) * 1000;
-   now = past=millis();
-   anglePast=angle;
-  }
-  now=millis();
-  cout &lt;&lt; "Encoder Pos : " &lt;&lt; encoder_pos &lt;&lt; "\tAngle : " &lt;&lt; angle &lt;&lt; "\t Vel : " &lt;&lt; vel &lt;&lt; "\n";
- }
-</code></pre>
+<span class="err">```</span><span class="n">c</span>
+ <span class="n">now</span> <span class="o">=</span> <span class="n">past</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+ <span class="kt">float</span> <span class="n">anglePast</span> <span class="o">=</span> <span class="n">angle</span><span class="p">;</span>
+ <span class="kt">float</span> <span class="n">angleNow</span> <span class="o">=</span> <span class="n">angle</span><span class="p">;</span>
+ <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">((</span><span class="n">now</span><span class="o">-</span><span class="n">past</span><span class="p">)</span><span class="o">&gt;</span><span class="n">controlPeriod</span><span class="p">){</span>
+   <span class="n">angleNow</span> <span class="o">=</span><span class="n">angle</span><span class="p">;</span>
+   <span class="n">vel</span> <span class="o">=</span> <span class="p">(</span><span class="n">angleNow</span><span class="o">-</span><span class="n">anglePast</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">now</span><span class="o">-</span><span class="n">past</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">;</span>
+   <span class="n">now</span> <span class="o">=</span> <span class="n">past</span><span class="o">=</span><span class="n">millis</span><span class="p">();</span>
+   <span class="n">anglePast</span><span class="o">=</span><span class="n">angle</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">now</span><span class="o">=</span><span class="n">millis</span><span class="p">();</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Encoder Pos : "</span> <span class="o">&lt;&lt;</span> <span class="n">encoder_pos</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\t</span><span class="s">Angle : "</span> <span class="o">&lt;&lt;</span> <span class="n">angle</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\t</span><span class="s"> Vel : "</span> <span class="o">&lt;&lt;</span> <span class="n">vel</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+ <span class="p">}</span>
+</code></pre></div></div>
 
 <p>따라서 코드를 정리하면 이렇게 된다.</p>
 
-<pre><code data-trim="" class="yml">
-#include<iostream>
-#include<wiringPi.h>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+#include&lt;wiringPi.h&gt;
 #define PhaseA 21
 #define PhaseB 22
-using namespace std;
+</span><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
  
-uint32_t past;
-uint32_t now;
-uint32_t controlPeriod = 20; //20ms
-double encoder_pulse = 0;
-double angle = 0;
-int encoder_pos = 0;
+<span class="kt">uint32_t</span> <span class="n">past</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">now</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">controlPeriod</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="c1">//20ms</span>
+<span class="kt">double</span> <span class="n">encoder_pulse</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">angle</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">encoder_pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
  
-bool State_A = 0;
-bool State_B = 0;
-float vel=0;
-void Interrupt_A();
-void Interrupt_B(); 
+<span class="n">bool</span> <span class="n">State_A</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">bool</span> <span class="n">State_B</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">vel</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">Interrupt_A</span><span class="p">();</span>
+<span class="kt">void</span> <span class="nf">Interrupt_B</span><span class="p">();</span> 
  
-int main(){
-    wiringPiSetup();
-    pinMode(PhaseA, INPUT);
-    pinMode(PhaseB, INPUT);
-    wiringPiISR(PhaseA, INT_EDGE_BOTH, &amp;Interrupt_A);
-    wiringPiISR(PhaseB, INT_EDGE_BOTH, &amp;Interrupt_B);
-    encoder_pulse = (float)360 / (3600 * 4) * 1000; //3600 PPR    
-    now = past = millis();
-    float anglePast = angle;
-    float angleNow = angle;
-    while(1){
-        if((now-past)&gt;controlPeriod){
-            angleNow =angle;
-            vel = (angleNow-anglePast)/(now-past);
-            now = past=millis();
-            anglePast=angle;
-        }
-        now=millis();
-        cout &lt;&lt; "Encoder Pos : " &lt;&lt; encoder_pos &lt;&lt; "\tAngle : " &lt;&lt; angle &lt;&lt; "\t Vel : " &lt;&lt; vel &lt;&lt; "\n";
-    }
-}
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">wiringPiSetup</span><span class="p">();</span>
+    <span class="n">pinMode</span><span class="p">(</span><span class="n">PhaseA</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+    <span class="n">pinMode</span><span class="p">(</span><span class="n">PhaseB</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+    <span class="n">wiringPiISR</span><span class="p">(</span><span class="n">PhaseA</span><span class="p">,</span> <span class="n">INT_EDGE_BOTH</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Interrupt_A</span><span class="p">);</span>
+    <span class="n">wiringPiISR</span><span class="p">(</span><span class="n">PhaseB</span><span class="p">,</span> <span class="n">INT_EDGE_BOTH</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Interrupt_B</span><span class="p">);</span>
+    <span class="n">encoder_pulse</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3600</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">;</span> <span class="c1">//3600 PPR    </span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">past</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+    <span class="kt">float</span> <span class="n">anglePast</span> <span class="o">=</span> <span class="n">angle</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">angleNow</span> <span class="o">=</span> <span class="n">angle</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">((</span><span class="n">now</span><span class="o">-</span><span class="n">past</span><span class="p">)</span><span class="o">&gt;</span><span class="n">controlPeriod</span><span class="p">){</span>
+            <span class="n">angleNow</span> <span class="o">=</span><span class="n">angle</span><span class="p">;</span>
+            <span class="n">vel</span> <span class="o">=</span> <span class="p">(</span><span class="n">angleNow</span><span class="o">-</span><span class="n">anglePast</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">now</span><span class="o">-</span><span class="n">past</span><span class="p">);</span>
+            <span class="n">now</span> <span class="o">=</span> <span class="n">past</span><span class="o">=</span><span class="n">millis</span><span class="p">();</span>
+            <span class="n">anglePast</span><span class="o">=</span><span class="n">angle</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">now</span><span class="o">=</span><span class="n">millis</span><span class="p">();</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Encoder Pos : "</span> <span class="o">&lt;&lt;</span> <span class="n">encoder_pos</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\t</span><span class="s">Angle : "</span> <span class="o">&lt;&lt;</span> <span class="n">angle</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\t</span><span class="s"> Vel : "</span> <span class="o">&lt;&lt;</span> <span class="n">vel</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
  
-void Interrupt_A() {
-    State_A = digitalRead(PhaseA);
-    State_B = digitalRead(PhaseB);
-    if (State_A == 1) {
-        if (State_B == 0) {
-            encoder_pos++;                    // 회전방향 : CW
-            angle +=  encoder_pulse;
-        }
-        else {
-            encoder_pos--;                    // 회전방향 : CCW
-            angle -= encoder_pulse;
-        }
-    }
-    else {
-        if (State_B == 1) {
-            encoder_pos++;                    // 회전방향 : CW
-            angle += encoder_pulse;
-        }
-        else {
-            encoder_pos--;                    // 회전방향 : CCW
-            angle -= encoder_pulse;
-        }
-    }
-}
+<span class="kt">void</span> <span class="nf">Interrupt_A</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">State_A</span> <span class="o">=</span> <span class="n">digitalRead</span><span class="p">(</span><span class="n">PhaseA</span><span class="p">);</span>
+    <span class="n">State_B</span> <span class="o">=</span> <span class="n">digitalRead</span><span class="p">(</span><span class="n">PhaseB</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">State_A</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">State_B</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">encoder_pos</span><span class="o">++</span><span class="p">;</span>                    <span class="c1">// 회전방향 : CW</span>
+            <span class="n">angle</span> <span class="o">+=</span>  <span class="n">encoder_pulse</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">encoder_pos</span><span class="o">--</span><span class="p">;</span>                    <span class="c1">// 회전방향 : CCW</span>
+            <span class="n">angle</span> <span class="o">-=</span> <span class="n">encoder_pulse</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">State_B</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">encoder_pos</span><span class="o">++</span><span class="p">;</span>                    <span class="c1">// 회전방향 : CW</span>
+            <span class="n">angle</span> <span class="o">+=</span> <span class="n">encoder_pulse</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">encoder_pos</span><span class="o">--</span><span class="p">;</span>                    <span class="c1">// 회전방향 : CCW</span>
+            <span class="n">angle</span> <span class="o">-=</span> <span class="n">encoder_pulse</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
  
-void Interrupt_B() {
-    State_A = digitalRead(PhaseA);
-    State_B = digitalRead(PhaseB);
-    if (State_B == 1) {
+<span class="kt">void</span> <span class="nf">Interrupt_B</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">State_A</span> <span class="o">=</span> <span class="n">digitalRead</span><span class="p">(</span><span class="n">PhaseA</span><span class="p">);</span>
+    <span class="n">State_B</span> <span class="o">=</span> <span class="n">digitalRead</span><span class="p">(</span><span class="n">PhaseB</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">State_B</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
  
-        if (State_A == 1) {
-            encoder_pos++;                    // 회전방향 : CW
-            angle += encoder_pulse;
-        }
-        else {
-            encoder_pos--;                    // 회전방향 : CCW
-            angle -= encoder_pulse;
-        }
-    }
-    else {
-        if (State_A == 0) {
-            encoder_pos++;                    // 회전방향 : CW
-            angle +=  encoder_pulse;
-        }
-        else {
-            encoder_pos--;                    // 회전방향 : CCW
-            angle -=  encoder_pulse;
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
+        <span class="k">if</span> <span class="p">(</span><span class="n">State_A</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">encoder_pos</span><span class="o">++</span><span class="p">;</span>                    <span class="c1">// 회전방향 : CW</span>
+            <span class="n">angle</span> <span class="o">+=</span> <span class="n">encoder_pulse</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">encoder_pos</span><span class="o">--</span><span class="p">;</span>                    <span class="c1">// 회전방향 : CCW</span>
+            <span class="n">angle</span> <span class="o">-=</span> <span class="n">encoder_pulse</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">State_A</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">encoder_pos</span><span class="o">++</span><span class="p">;</span>                    <span class="c1">// 회전방향 : CW</span>
+            <span class="n">angle</span> <span class="o">+=</span>  <span class="n">encoder_pulse</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">encoder_pos</span><span class="o">--</span><span class="p">;</span>                    <span class="c1">// 회전방향 : CCW</span>
+            <span class="n">angle</span> <span class="o">-=</span>  <span class="n">encoder_pulse</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
+<p>라즈베리파이에서 컴파일 할때</p>
 
+<p>g++ -o Encoder Encoder.cpp -lwiringPi   로 컴파일하면 된다.</p>
 
-
-라즈베리파이에서 컴파일 할때 
-
-g++ -o Encoder Encoder.cpp -lwiringPi   로 컴파일하면 된다. 
-
-
-</wiringPi.h></iostream></code></pre>
 
           </section>
 

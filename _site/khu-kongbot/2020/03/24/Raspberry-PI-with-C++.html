@@ -239,70 +239,69 @@ inputCMD.detach();
 
 <p>만약 자식쓰레드인 inputCMD가 종료될때까지 기다리는것을 하고 싶으면 inputCMD.join()을 사용하면 된다.</p>
 
-<pre><code>
-#include&lt;thread&gt;
-#include&lt;iostream&gt;
-using namespace std;
-void input(char &amp;CMD) {
-    do {
-        cin &gt;&gt; CMD;
-    } while (CMD != 'q');
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&amp;lt;thread&amp;gt;
+#include&amp;lt;iostream&amp;gt;
+</span><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">input</span><span class="p">(</span><span class="kt">char</span> <span class="o">&amp;</span><span class="n">CMD</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">CMD</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">CMD</span> <span class="o">!=</span> <span class="sc">'q'</span><span class="p">);</span>
     
-}
+<span class="p">}</span>
  
-int main()
-{
-    char CMD;
-    thread inputCMD(&amp;input, ref(CMD));//INPUT command Thread.....
-    inputCMD.detach();
-    do{
-        switch (int(CMD)){
-            case 119 :
-                //CMD=w
-                cout&lt;&lt; "go\n";
-                break;
-            case 115 :
-                //CMD=s
-                cout&lt;&lt;"back\n";
-                break;
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">CMD</span><span class="p">;</span>
+    <span class="kr">thread</span> <span class="n">inputCMD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">input</span><span class="p">,</span> <span class="n">ref</span><span class="p">(</span><span class="n">CMD</span><span class="p">));</span><span class="c1">//INPUT command Thread.....</span>
+    <span class="n">inputCMD</span><span class="p">.</span><span class="n">detach</span><span class="p">();</span>
+    <span class="k">do</span><span class="p">{</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="kt">int</span><span class="p">(</span><span class="n">CMD</span><span class="p">)){</span>
+            <span class="k">case</span> <span class="mi">119</span> <span class="p">:</span>
+                <span class="c1">//CMD=w</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="s">"go</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">115</span> <span class="p">:</span>
+                <span class="c1">//CMD=s</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"back</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
  
-            case 87:
-                //CMD=W
-                cout&lt;&lt; "GO\n";
-                break;
+            <span class="k">case</span> <span class="mi">87</span><span class="p">:</span>
+                <span class="c1">//CMD=W</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="s">"GO</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
             
-            case 83:
-                //CMD=S
-                cout&lt;&lt; "BACK\n";
-                break;
+            <span class="k">case</span> <span class="mi">83</span><span class="p">:</span>
+                <span class="c1">//CMD=S</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="s">"BACK</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
             
-            case 97:
-                //CMD=a
-                cout&lt;&lt; "chage roll - direction \n";
-                break;
-            case 100:
-                //CMD=d
-                cout&lt;&lt; "chage roll + direction \n";
-                break;
-            case 106:
-                //CMD=j
-                cout&lt;&lt; "chage yaw  -15 degree direction \n";
-                break;
-            case 107:
-                //CMD=j
-                cout&lt;&lt; "chage yaw  +15 degree direction \n";
-                break;
+            <span class="k">case</span> <span class="mi">97</span><span class="p">:</span>
+                <span class="c1">//CMD=a</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="s">"chage roll - direction </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="c1">//CMD=d</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="s">"chage roll + direction </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">106</span><span class="p">:</span>
+                <span class="c1">//CMD=j</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="s">"chage yaw  -15 degree direction </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">107</span><span class="p">:</span>
+                <span class="c1">//CMD=j</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="s">"chage yaw  +15 degree direction </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
  
-        }
+        <span class="p">}</span>
  
-    } while (CMD != 'q');
-    cout &lt;&lt; "quit" &lt;&lt; endl;
-//방법 1
-//join()을 실행시키면 t가 종료되기 전까지 기다린다.
-    return 0;
-}
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">CMD</span> <span class="o">!=</span> <span class="sc">'q'</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"quit"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="c1">//방법 1</span>
+<span class="c1">//join()을 실행시키면 t가 종료되기 전까지 기다린다.</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-</code></pre>
+</code></pre></div></div>
 
           </section>
 
