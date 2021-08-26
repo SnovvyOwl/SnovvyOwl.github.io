@@ -1,7 +1,7 @@
 ---
 layout: post
 section-type: post
-title: Socket Communication for Linux[ubuntu] {C++}
+title: Socket Communication for Linux
 category: KHU-KongBot
 tags: [ 'c++','ubuntu']
 ---

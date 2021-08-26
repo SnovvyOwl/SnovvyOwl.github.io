@@ -1,7 +1,7 @@
 ---
 layout: post
 section-type: post
-title: Encoder sensing Code with RPi
+title: Encoder sensing Code with Raspberry Pi
 category: KHU-KongBot
 tags: [ 'RaspberryPi' ,'c++']
 ---
