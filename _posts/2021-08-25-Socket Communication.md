@@ -3,7 +3,7 @@ layout: post
 section-type: post
 title: Socket Communication for Linux[ubuntu] {C++}
 category: KHU-KongBot
-tags: [ 'c++','Linux[ubuntu]']
+tags: [ 'c++','ubuntu']
 ---
 
 KHU-Kongbot2 Project를 진행하면서 객체지향적 요소를 왠만하면 넣지 않을라고 했다. 이유는 함께하는 기계과 친구들이 객체지향보다 절차지향적인 코드에 익숙했기 때문이다.

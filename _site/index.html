@@ -2,7 +2,7 @@
 <!-- Index Layout Start -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
   
 <!-- HEAD Start -->
@@ -197,12 +197,6 @@ If you want to have a static message in your intro layout, disable the dynamic-t
         
       
         
-      
-        
-      
-        
-      
-        
           
 <!-- profile Start -->
 
@@ -234,13 +228,11 @@ If you want to have a static message in your intro layout, disable the dynamic-t
       
         
       
+        
+      
+        
+      
     
-      
-        
-      
-        
-      
-        
       
         
       
@@ -274,18 +266,23 @@ If you want to have a static message in your intro layout, disable the dynamic-t
 
 
         
-        <h4> <strong> 25 Aug 2021 </strong>
+        <h4> <strong> 26 Aug 2021 </strong>
           <small>.
             <a class="category" href="/categories/khu-kongbot.html">
               KHU-KongBot
             </a>
           .</small>
-          <strong> <a href="/khu-kongbot/2021/08/25/Socket-Communication.html">Socket Communication for Linux[ubuntu] {C++} </a> </strong>
-          <small> <a href="/khu-kongbot/2021/08/25/Socket-Communication.html#disqus_thread">Comments</a></small>
+          <strong> <a href="/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html">Calculate system by openCV mat class[cv::Mat] {C++} </a> </strong>
+          <small> <a href="/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html#disqus_thread">Comments</a></small>
         </h4>
 
         <section class="text-justify">
-          <p>KHU-Kongbot2 Project를 진행하면서 객체지향적 요소를 왠만하면 넣지 않을라고 했다. 이유는 함께하는 기계과 친구들이 객체지향보다 절차지향적인 코드에 익숙했기 때문이다.</p> <p>하지만 계속 진행하다보니 코드가 점점 꼬였다.</p> <p>실제로 각각의 요소별로 같은 코드로 묶이는 것들도 많았고 요소별로 다른 함수를 작성하고 변수를 일일이 설정해줘야해서 코드가 복잡해지다보니 알아보기도 힘들고 코드길이가 많이 길어졌다.</p> <p>따라서 이를 해결하기 위해 프로그램을 절차지향에서 객체지향으로 다시 짜기로 마음 먹었다.</p> <p>또한 객체지향으로 바꾸면서 기존의 로봇의 현재의 state를 계산하고 이에 따른 제어 input을 계산하는 헤더파일을 만들었다.</p> <p>만들어진 헤더파일의 크기와 계산양을 보니 라즈베리파이4에서 이를 계산하고 시리얼통신을 통해 아두이노로 내려주는 것까지 하기엔 너무 리소스가 모잘라 보였다.</p> <p>결국이 제어 입력과 현재의 상태를 계산하는...
+          <p>KHU-KongBot2 프로젝트를 진행하다보니 센서의 데이터와 실제 로봇의 모델을 계산해서 현재의 로봇의 상태를 추정하는 칼만필터를 사용할 필요가 생겼다.</p>
+
+<p>하지만 c++ 에 기본 라이브러리에서는 Matrix 클래스는 존재 하지 않으니 실재로 구현을 해보았는데, 직접 짜고 보니 굉장히 무거워 보였다.</p>
+
+<p>직접 작성한 Matrix 클래스</p>
+
         </section>
 
         <h4><a href="/blog/">Archive</a></h4>
@@ -310,11 +307,11 @@ If you want to have a static message in your intro layout, disable the dynamic-t
       
         
       
+        
+      
+        
+      
     
-      
-        
-      
-        
       
         
       
@@ -463,15 +460,9 @@ If you want to have a static message in your intro layout, disable the dynamic-t
       
         
       
+        
+      
     
-      
-        
-      
-        
-      
-        
-      
-        
       
         
       
@@ -521,6 +512,12 @@ If you want to have a static message in your intro layout, disable the dynamic-t
 
 <!-- Contact End -->
 
+        
+      
+        
+      
+        
+      
         
       
         
