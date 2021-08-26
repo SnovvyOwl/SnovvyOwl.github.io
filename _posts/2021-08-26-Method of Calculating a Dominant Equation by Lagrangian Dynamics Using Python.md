@@ -28,6 +28,11 @@ use_math: true
 
 $ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q  $ 
 
+보존계에서는 $ Q = 0$ 이므로 라그랑주 방정식은 아래와 같다.
+$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=0  $ 
+
+그렇다면 여기서 $L$과 $q$는 무엇이냐면 
+q는 장
 그렇다면 우리의 시스템에 요소에 해당하는 에너지항을 구해보자 
 
 
