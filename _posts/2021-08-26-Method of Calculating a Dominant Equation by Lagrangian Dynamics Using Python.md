@@ -2,7 +2,7 @@
 layout: post
 section-type: post
 title: Method of Calculating a Dominant Equation by Lagrangian Dynamics Using Python
-category: Dynamic and Control Theory
+category: Dynamics and Control
 tags: [ 'python']
 ---
 
@@ -24,7 +24,8 @@ tags: [ 'python']
 
 # Lagrange Equation
 라그랑주 역학에 대해서 간략히 설명하겠다.
-$$\frac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q  $$
+
+$$ \frac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q  $$
 
 그렇다면 우리의 시스템에 요소에 해당하는 에너지항을 구해보자 
 
