@@ -63,7 +63,7 @@ $g$ = gravity accelation (scala)\
 $l_{p}$ = length of pendulums C.M to rotational Axis\
 $\theta_{s}$ = angle of Shell (Global Frame)\
 $\theta_{p}$ =angle of pendulums (Global Frame)\
-$r_{pm}= length of Motor Axis to Center of Shell
+$r_{pm}$= length of Motor Axis to Center of Shell
 
 먼저  Body 1인 Shell의 운동에너지를 구해보자\
 로봇은 $R_{s}\dot{\theta_{s}}$의 속도로 전진하고 있다.
