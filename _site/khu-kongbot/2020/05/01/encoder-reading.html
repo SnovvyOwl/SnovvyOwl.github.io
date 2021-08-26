@@ -257,15 +257,12 @@ uint32_t controlPeriod = 20
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">Interrupt_A</span><span class="p">();</span>
 <span class="kt">void</span> <span class="nf">Interrupt_B</span><span class="p">();</span>
-<span class="err">```</span><span class="n">c</span>
-<span class="err">는</span> <span class="err">인터럽트가</span> <span class="err">발생하면</span> <span class="err">구동되는</span> <span class="err">함수이다</span><span class="p">.</span> <span class="err">상의</span> <span class="err">변화에</span> <span class="err">따라</span> <span class="err">회전각을</span> <span class="err">측정한다</span><span class="p">.</span>
+</code></pre></div></div>
+<p>는 인터럽트가 발생하면 구동되는 함수이다. 상의 변화에 따라 회전각을 측정한다.</p>
 
+<p>20ms 동안 발생한 회전각을 이용해 각속도를 구하는 부분이다.</p>
 
-
-<span class="mi">20</span><span class="n">ms</span> <span class="err">동안</span> <span class="err">발생한</span> <span class="err">회전각을</span> <span class="err">이용해</span> <span class="err">각속도를</span> <span class="err">구하는</span> <span class="err">부분이다</span><span class="p">.</span>
-
-<span class="err">```</span><span class="n">c</span>
- <span class="n">now</span> <span class="o">=</span> <span class="n">past</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">now</span> <span class="o">=</span> <span class="n">past</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
  <span class="kt">float</span> <span class="n">anglePast</span> <span class="o">=</span> <span class="n">angle</span><span class="p">;</span>
  <span class="kt">float</span> <span class="n">angleNow</span> <span class="o">=</span> <span class="n">angle</span><span class="p">;</span>
  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
