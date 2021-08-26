@@ -26,7 +26,7 @@ use_math: true
 # Lagrange Equation
 라그랑주 역학에 대해서 간략히 설명하겠다.
 
-$$ \frac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q  $$
+$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q  $ 
 
 그렇다면 우리의 시스템에 요소에 해당하는 에너지항을 구해보자 
 
