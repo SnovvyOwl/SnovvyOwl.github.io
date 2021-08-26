@@ -72,26 +72,24 @@ uint32_t controlPeriod = 20
 둘다 발생한것을 체크하는 INT_EDGE_BOTH​﻿ 가 있다.
 
 
-<pre><code data-trim class="yml">
+
 이번에는 INT_EDGE_BOTH를 이용하여 둘다 측정하는 것으로 하였다.
-
+```c
 wiringPiISR(PhaseA, INT_EDGE_BOTH, &Interrupt_A);
-
 wiringPiISR(PhaseB, INT_EDGE_BOTH, &Interrupt_B);
-</code></pre>
+````
 
-<pre><code data-trim class="yml">
+```c
 void Interrupt_A();
-
 void Interrupt_B();
-</code></pre>
+```c
 는 인터럽트가 발생하면 구동되는 함수이다. 상의 변화에 따라 회전각을 측정한다.
 
 
 
 20ms 동안 발생한 회전각을 이용해 각속도를 구하는 부분이다.
 
-<pre><code data-trim class="yml">
+```c
  now = past = millis();
  float anglePast = angle;
  float angleNow = angle;
@@ -105,7 +103,7 @@ void Interrupt_B();
   now=millis();
   cout << "Encoder Pos : " << encoder_pos << "\tAngle : " << angle << "\t Vel : " << vel << "\n";
  }
-</code></pre>
+```
 
 따라서 코드를 정리하면 이렇게 된다.
 
