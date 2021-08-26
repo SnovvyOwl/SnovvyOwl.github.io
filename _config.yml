@@ -228,3 +228,10 @@ sass:
 gems:
   - jekyll-paginate
   - jemoji
+
+# Conversion
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false

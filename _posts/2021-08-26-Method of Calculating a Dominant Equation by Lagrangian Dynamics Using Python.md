@@ -4,6 +4,7 @@ section-type: post
 title: Method of Calculating a Governing  Equation by Lagrangian Dynamics Using Python
 category: dynamics and control
 tags: [ 'python']
+use_math: true
 ---
 
 로봇에 대해 공부하다보면 정형화된 6축 매뉴퓰레이터가 아닌 다양한 로봇을 설계할 때가 있다. 
