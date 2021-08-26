@@ -24,7 +24,7 @@ tags: [ 'python']
 
 그렇다면 우리의 시스템에 요소에 해당하는 에너지항을 구해보자 
 
-![RobotSystem](/_posts/imgs/lagrangeanalysis.jpg )
+![RobotSystem](/img/lagrangeanalysis.jpg )
 
 
 ```python
