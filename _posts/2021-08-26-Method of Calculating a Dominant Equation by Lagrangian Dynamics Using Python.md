@@ -24,7 +24,7 @@ tags: [ 'python']
 
 그렇다면 우리의 시스템에 요소에 해당하는 에너지항을 구해보자 
 
-![RobotSystem](https://github.com/SnovvyOwl/SnovvyOwl.github.io/_post/lagrangeanalysis.jpg)
+![RobotSystem](https://github.com/SnovvyOwl/SnovvyOwl.github.io/blob/main/_posts/lagrangeanalysis.jpg)
 ```python
 from sympy import diff, Function, symbols, cos, sin, latex, simplify
 from sympy.physics.mechanics import *
