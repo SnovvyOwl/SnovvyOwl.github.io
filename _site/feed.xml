@@ -7,7 +7,7 @@
 		<atom:link href="https://SnovvyOwl.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>Calculate system by openCV mat class[cv::Mat] {C++}</title>
+				<title>Calculate system by openCV mat class[cv::Mat]</title>
 				
 				
 					<description>&lt;p&gt;KHU-KongBot2 프로젝트를 진행하다보니 센서의 데이터와 실제 로봇의 모델을 계산해서 현재의 로봇의 상태를 추정하는 칼만필터를 사용할 필요가 생겼다.&lt;/p&gt;

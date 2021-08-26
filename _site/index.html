@@ -272,17 +272,12 @@ If you want to have a static message in your intro layout, disable the dynamic-t
               KHU-KongBot
             </a>
           .</small>
-          <strong> <a href="/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html">Calculate system by openCV mat class[cv::Mat] {C++} </a> </strong>
+          <strong> <a href="/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html">Calculate system by openCV mat class[cv::Mat] </a> </strong>
           <small> <a href="/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html#disqus_thread">Comments</a></small>
         </h4>
 
         <section class="text-justify">
-          <p>KHU-KongBot2 프로젝트를 진행하다보니 센서의 데이터와 실제 로봇의 모델을 계산해서 현재의 로봇의 상태를 추정하는 칼만필터를 사용할 필요가 생겼다.</p>
-
-<p>하지만 c++ 에 기본 라이브러리에서는 Matrix 클래스는 존재 하지 않으니 실재로 구현을 해보았는데, 직접 짜고 보니 굉장히 무거워 보였다.</p>
-
-<p>직접 작성한 Matrix 클래스</p>
-
+          <p>KHU-KongBot2 프로젝트를 진행하다보니 센서의 데이터와 실제 로봇의 모델을 계산해서 현재의 로봇의 상태를 추정하는 칼만필터를 사용할 필요가 생겼다.</p> <p>하지만 c++ 에 기본 라이브러리에서는 Matrix 클래스는 존재 하지 않으니 실재로 구현을 해보았는데, 직접 짜고 보니 굉장히 무거워 보였다.</p> <p>직접 작성한 Matrix 클래스 수치해석적인 inv() 메서드도 열심히 구현해 보았지만 조금 더 최적화 잘된 라이브러리를 찾아보았다.</p> <p>그러다가 머리를 스친게 하나 있었다.</p> <p>요즘 컴퓨터비전쪽으로 공부를 하다보니 생각이 난 것이데 이미지 파일이 python에서는 2차원(또는 3차원) numpy array 로 구성되어 있다는 것이다.</p> <p>따라서 이미지 처리하는 C++ 라이브러리인 OpenCV가 떠올랐다. 이미 나의 프로젝트에서는 OpenCV를 이용하고 있었으므로 이를 그냥 사용만 하면 되는 것이다.</p> <p>이번에 사용하면서...
         </section>
 
         <h4><a href="/blog/">Archive</a></h4>

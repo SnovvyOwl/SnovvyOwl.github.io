@@ -18,7 +18,7 @@
   <meta name="author" content="Seongwon Lee">
   <meta name="keywords" content="Robotics, Autonumus car,Machine Learing, Deep Learning, Reinforcement Learning, Photograph">
   <link rel="canonical" href="/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html">
-  <title>{SnowyOwl} | Calculate system by openCV mat class[cv::Mat] {C++}</title>
+  <title>{SnowyOwl} | Calculate system by openCV mat class[cv::Mat]</title>
 
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -181,7 +181,7 @@
 <!-- Swipe Instructions End -->
 
 
-          <h1><strong>Calculate system by openCV mat class[cv::Mat] {C++}</strong></h1>
+          <h1><strong>Calculate system by openCV mat class[cv::Mat]</strong></h1>
           <h4>
             <strong>26 Aug 2021</strong>
             <small>
@@ -204,7 +204,108 @@
 
 <p>하지만 c++ 에 기본 라이브러리에서는 Matrix 클래스는 존재 하지 않으니 실재로 구현을 해보았는데, 직접 짜고 보니 굉장히 무거워 보였다.</p>
 
-<p><a href="https://github.com/SnovvyOwl/SampleCode/blob/master/Matrix.h">직접 작성한 Matrix 클래스</a></p>
+<p><a href="https://github.com/SnovvyOwl/SampleCode/blob/master/Matrix.h">직접 작성한 Matrix 클래스</a> 수치해석적인 inv() 메서드도 열심히 구현해 보았지만 조금 더 최적화 잘된 라이브러리를 찾아보았다.</p>
+
+<p>그러다가 머리를 스친게 하나 있었다.</p>
+
+<p>요즘 컴퓨터비전쪽으로 공부를 하다보니 생각이 난 것이데 이미지 파일이 python에서는 2차원(또는 3차원) numpy array 로 구성되어 있다는 것이다.</p>
+
+<p>따라서 이미지 처리하는  C++ 라이브러리인 OpenCV가 떠올랐다. 이미 나의 프로젝트에서는 OpenCV를 이용하고 있었으므로 이를 그냥 사용만 하면 되는 것이다.</p>
+
+<p>이번에 사용하면서 주로 쓴 OpenCV Mat class를 포스팅하겠다.</p>
+
+<h1 id="전체-예제-코드">전체 예제 코드</h1>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;iostream&gt;
+#include&lt;opencv2/opencv.hpp&gt;
+</span><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">cv</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="c1">//Mat 기본적인 매트릭스 클래스</span>
+    <span class="n">Mat</span> <span class="n">X</span> <span class="o">=</span> <span class="p">(</span><span class="n">Mat_</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+    <span class="n">Mat</span> <span class="n">Z</span><span class="p">;</span>
+    <span class="c1">//Matx </span>
+    <span class="c1">//작은 크기 크기가 정해저버림</span>
+    <span class="c1">//각각의 요소에 접근할수 없음</span>
+    <span class="n">Matx31d</span> <span class="n">Y</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span> 
+    <span class="n">Matx</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span> <span class="n">W</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+    <span class="n">Mat</span> <span class="n">I</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">CV_64FC1</span><span class="p">);</span><span class="c1">//단위 행렬 만들기</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">I</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">X</span><span class="p">.</span><span class="n">inv</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="c1">//X의 역행렬 계산</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">X</span><span class="p">.</span><span class="n">t</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="c1">//X의 전치 행렬</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">X</span><span class="p">.</span><span class="n">diag</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// 대각 행렬</span>
+    
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">X</span><span class="p">;</span><span class="c1">//현재의 X</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">X</span><span class="o">*</span><span class="n">Y</span><span class="p">;</span><span class="c1">//X*Y</span>
+    <span class="n">X</span><span class="p">.</span><span class="n">mul</span><span class="p">(</span><span class="n">Y</span><span class="p">);</span> <span class="c1">//X*Y를 X에 저장</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="n">X</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span><span class="c1">//바뀐 X</span>
+    
+    <span class="n">Z</span><span class="p">.</span><span class="n">copySize</span><span class="p">(</span><span class="n">X</span><span class="p">);</span><span class="c1">//Z에 X크기 집어넣기 이렇게 안하면 가끔 사이즈가 안맞다고 계산이 안되는 경우가 있음</span>
+    <span class="n">Z</span><span class="o">=</span><span class="n">X</span><span class="p">;</span><span class="c1">//Z에 X대입</span>
+    
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">Y</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="n">Z</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">Z</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span><span class="c1">//Z에 1번 인덱스 2번째 행에 있는 값출력</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="생성자">생성자</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//Mat 기본적인 매트릭스 클래스</span>
+<span class="n">Mat</span> <span class="n">X</span> <span class="o">=</span> <span class="p">(</span><span class="n">Mat_</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="n">Mat</span> <span class="n">Z</span><span class="p">;</span>
+<span class="c1">//Matx </span>
+<span class="c1">//작은 크기 크기가 정해저버림</span>
+<span class="c1">//각각의 요소에 접근할수 없음</span>
+<span class="n">Matx31d</span> <span class="nf">Y</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span> 
+<span class="n">Matx</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">&gt;</span> <span class="n">W</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</code></pre></div></div>
+<p>Mat과 Matx는 다른데 Mat은 사이즈가 바뀔 수 있고 Matx는 아니라는 점이다.</p>
+
+<p>또한 Mat은 at()을 이용하여 각각의 요소에 접근할수 있는 데 Matx는 할수없다.</p>
+
+<p>하지만 Matx를 쓰는 이유는 코드가 더가벼워 질수 있기 때문이다.</p>
+
+<p>Matx는 크기가 정해지고 안에 있는 값을 바꿀 수없을때 쓸수 있고 코드가 가벼워지길 원한다면 이런 조건일때는 Matx를 적극적으로 사용하는 것이 좋을 것 같다.</p>
+
+<h2 id="수치해석적-메서드">수치해석적 메서드</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Mat</span> <span class="n">I</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">CV_64FC1</span><span class="p">);</span><span class="c1">//단위 행렬 만들기</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">I</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">X</span><span class="p">.</span><span class="n">inv</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="c1">//X의 역행렬 계산</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">X</span><span class="p">.</span><span class="n">t</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="c1">//X의 전치 행렬</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">X</span><span class="p">.</span><span class="n">diag</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// 대각 행렬</span>
+</code></pre></div></div>
+<p>Mat 행렬은 단위 행렬도 생성해주는 메서드와 역행렬을 계산해주는 매서드 inv(), 전치 행렬을 계산해주는 메서드 t() , 대각 행렬을 계산해주는 매서드 diag()가 있다.</p>
+
+<p>이외에도 다양한 메서드가 있지만 크게 쓰이는 건 이 정도이다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">X</span><span class="p">;</span><span class="c1">//현재의 X</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">X</span><span class="o">*</span><span class="n">Y</span><span class="p">;</span><span class="c1">//X*Y</span>
+<span class="n">X</span><span class="p">.</span><span class="n">mul</span><span class="p">(</span><span class="n">Y</span><span class="p">);</span> <span class="c1">//X*Y를 X에 저장</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="n">X</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span><span class="c1">//바뀐 X</span>
+</code></pre></div></div>
+<p>또한 mul()이라는 메서드가 있는데 이것을 쓰면 현재 객체에 파라미터로 넣어준 객체를 곱해준 값을 현재 객체에 넣어주는 것이다.</p>
+
+<p>이것은 일반적인 행렬곱과는 다른데 X<em>Y를 하면 이것을 계산한 값을 리턴 해주는 방면 X.mul(Y)는 X=X</em>Y와 같은 것이 된다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Z</span><span class="p">.</span><span class="n">copySize</span><span class="p">(</span><span class="n">X</span><span class="p">);</span><span class="c1">//Z에 X크기 집어넣기 이렇게 안하면 가끔 사이즈가 안맞다고 계산이 안되는 경우가 있음</span>
+<span class="n">Z</span><span class="o">=</span><span class="n">X</span><span class="p">;</span><span class="c1">//Z에 X대입</span>
+</code></pre></div></div>
+<p>Z는 위에서 그냥 Mat Z로 Mat 클래스로 Z를 정의만 해줬다.</p>
+
+<p>이를 그냥 수치 계산으로 넘기면 크기가 정해지지 않았다고 에러를 뱉어준다. 따라서 이미 정의된 Mat클래스중에 원하는 크기의 사이즈를 Z에 입력해줘야하는데, 이를 해주는 것이 copySize() 이다.</p>
+
+<h2 id="요소-접근">요소 접근</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">Z</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span><span class="c1">//Z에 1번 인덱스 2번째 행에 있는 값출력</span>
+</code></pre></div></div>
+<p>마지막으로는 at() 메서드인데 이는 파라미터로 넣어주는 인덱스에 있는 행렬 요소를 출력해준다.</p>
+
+<h1 id="후기">후기</h1>
+<p>내가 짠코드 보다 훨씬 더 간결하게 매트릭스를 선언할 수 있었다.</p>
+
+<p>기계과 출신이라 그런지 아직도 최적화쪽은 공부가 좀 필요한 것같았다.</p>
+
+<p>결과적으로 코드가 많이 가벼워진 것 같았다.</p>
+
+<p>그래도 오랜만에 수치해석적으로 Matrix.h를 짤 수 있어서 좋았다.</p>
 
           </section>
 
@@ -214,7 +315,7 @@
   <ul class="rrssb-buttons clearfix">
     
       <li class="rrssb-email">
-        <a href="mailto:?subject=Calculate system by openCV mat class[cv::Mat] {C++}&body=https://SnovvyOwl.github.io/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html" data-proofer-ignore>
+        <a href="mailto:?subject=Calculate system by openCV mat class[cv::Mat]&body=https://SnovvyOwl.github.io/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html" data-proofer-ignore>
           <span class="rrssb-icon">
             <svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
               <path d="M20.11 26.147c-2.335 1.05-4.36 1.4-7.124 1.4C6.524 27.548.84 22.916.84 15.284.84 7.343 6.602.45 15.4.45c6.854 0 11.8 4.7 11.8 11.252 0 5.684-3.193 9.265-7.398 9.3-1.83 0-3.153-.934-3.347-2.997h-.077c-1.208 1.986-2.96 2.997-5.023 2.997-2.532 0-4.36-1.868-4.36-5.062 0-4.75 3.503-9.07 9.11-9.07 1.713 0 3.7.4 4.6.972l-1.17 7.203c-.387 2.298-.115 3.3 1 3.4 1.674 0 3.774-2.102 3.774-6.58 0-5.06-3.27-8.994-9.304-8.994C9.05 2.87 3.83 7.545 3.83 14.97c0 6.5 4.2 10.2 10 10.202 1.987 0 4.09-.43 5.647-1.245l.634 2.22zM16.647 10.1c-.31-.078-.7-.155-1.207-.155-2.572 0-4.596 2.53-4.596 5.53 0 1.5.7 2.4 1.9 2.4 1.44 0 2.96-1.83 3.31-4.088l.592-3.72z"
@@ -227,7 +328,7 @@
     
     
       <li class="rrssb-facebook">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://SnovvyOwl.github.io/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html&title=Calculate system by openCV mat class[cv::Mat] {C++}" class="popup">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://SnovvyOwl.github.io/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html&title=Calculate system by openCV mat class[cv::Mat]" class="popup">
           <span class="rrssb-icon">
             <svg xmlns="https://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" width="29" height="29" viewBox="0 0 29 29"><path d="M26.4 0H2.6C1.714 0 0 1.715 0 2.6v23.8c0 .884 1.715 2.6 2.6 2.6h12.393V17.988h-3.996v-3.98h3.997v-3.062c0-3.746 2.835-5.97 6.177-5.97 1.6 0 2.444.173 2.845.226v3.792H21.18c-1.817 0-2.156.9-2.156 2.168v2.847h5.045l-.66 3.978h-4.386V29H26.4c.884 0 2.6-1.716 2.6-2.6V2.6c0-.885-1.716-2.6-2.6-2.6z"
               class="cls-2" fill-rule="evenodd"/></svg>
@@ -238,7 +339,7 @@
     
     
       <li class="rrssb-twitter">
-        <a href="https://twitter.com/share?url=https://SnovvyOwl.github.io/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html&text=Calculate system by openCV mat class[cv::Mat] {C++}"
+        <a href="https://twitter.com/share?url=https://SnovvyOwl.github.io/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html&text=Calculate system by openCV mat class[cv::Mat]"
         class="popup">
           <span class="rrssb-icon"><svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><path d="M24.253 8.756C24.69 17.08 18.297 24.182 9.97 24.62c-3.122.162-6.22-.646-8.86-2.32 2.702.18 5.375-.648 7.507-2.32-2.072-.248-3.818-1.662-4.49-3.64.802.13 1.62.077 2.4-.154-2.482-.466-4.312-2.586-4.412-5.11.688.276 1.426.408 2.168.387-2.135-1.65-2.73-4.62-1.394-6.965C5.574 7.816 9.54 9.84 13.802 10.07c-.842-2.738.694-5.64 3.434-6.48 2.018-.624 4.212.043 5.546 1.682 1.186-.213 2.318-.662 3.33-1.317-.386 1.256-1.248 2.312-2.4 2.942 1.048-.106 2.07-.394 3.02-.85-.458 1.182-1.343 2.15-2.48 2.71z"/></svg></span>
           <span class="rrssb-text">twitter</span>
@@ -260,7 +361,7 @@
     
     
       <li class="rrssb-reddit">
-        <a href="https://www.reddit.com/submit?url=https://SnovvyOwl.github.io/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html&title=Calculate system by openCV mat class[cv::Mat] {C++}" target="_blank">
+        <a href="https://www.reddit.com/submit?url=https://SnovvyOwl.github.io/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html&title=Calculate system by openCV mat class[cv::Mat]" target="_blank">
           <span class="rrssb-icon">
             <svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
               <path d="M11.794 15.316c0-1.03-.835-1.895-1.866-1.895-1.03 0-1.893.866-1.893 1.896s.863 1.9 1.9 1.9c1.023-.016 1.865-.916 1.865-1.9zM18.1 13.422c-1.03 0-1.895.864-1.895 1.895 0 1 .9 1.9 1.9 1.865 1.03 0 1.87-.836 1.87-1.865-.006-1.017-.875-1.917-1.875-1.895zM17.527 19.79c-.678.68-1.826 1.007-3.514 1.007h-.03c-1.686 0-2.834-.328-3.51-1.005-.264-.265-.693-.265-.958 0-.264.265-.264.7 0 1 .943.9 2.4 1.4 4.5 1.402.005 0 0 0 0 0 .005 0 0 0 0 0 2.066 0 3.527-.46 4.47-1.402.265-.264.265-.693.002-.958-.267-.334-.688-.334-.988-.043z"
@@ -395,7 +496,7 @@ $(window).scroll(toggleNavCollapse);$(function(){$("a.page-scroll").bind("click"
 <script>
 function addTohistory() {
   if (!window.location.host.startsWith("127.0.0.1")) {
-    history.pushState({}, 'Calculate system by openCV mat class[cv::Mat] {C++}', 'https://SnovvyOwl.github.io/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html');
+    history.pushState({}, 'Calculate system by openCV mat class[cv::Mat]', 'https://SnovvyOwl.github.io/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html');
   }
 }
 </script>
