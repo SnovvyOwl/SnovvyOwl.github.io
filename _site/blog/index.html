@@ -294,61 +294,6 @@ function addTohistory() {
 <!-- Gesture Navigation / Swipe Instruction Start -->
 
 
-  
-
-  
-
-    <!-- Blog Gesture Navigation Start -->
-
-    <script type="text/javascript" src="/js/hammer.min.js"></script>
-
-    <script>
-      var page = document.getElementById('page');
-
-      new Hammer(page).on('swipeleft', function(event) {
-        addTohistory();
-        
-          document.location.replace("/");
-        
-      });
-      new Hammer(page).on('swiperight', function(event) {
-        addTohistory();
-        
-          document.location.replace("/");
-        
-      });
-    </script>
-
-    <!-- Blog Gesture Navigation Start -->
-
-  
-
-  
-
-    <!-- Swipe Instructions for Blog Start -->
-
-    <script>
-      $(document).ready(function(){
-        if(!localStorage.getItem('blog-swipeshowed')){
-          $("#swipe-instruction").fadeIn();
-          $("#swipe-instruction .close-swipe-instruction").click(function(){
-            $("#swipe-instruction").fadeOut();
-          });
-          localStorage.setItem('blog-swipeshowed', true);
-        }
-      });
-    </script>
-
-    <!-- Swipe Instructions for Blog End -->
-
-  
-
-  
-
-<!-- Gesture Navigation / Swipe Instruction End -->
-
-
-
 <!-- Javascript End -->
 
 

@@ -7,6 +7,18 @@
 		<atom:link href="https://SnovvyOwl.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Method of Calculating a Dominant Equation by Lagrangian Dynamics Using Python</title>
+				
+				
+					<description>&lt;p&gt;로봇에 대해 공부하다보면 정형화된 6축 매뉴퓰레이터가 아닌 다양한 로봇을 설계할 때가 있다.&lt;/p&gt;
+</description>
+				
+				<pubDate>Thu, 26 Aug 2021 00:00:00 +0900</pubDate>
+				<link>https://SnovvyOwl.github.io/dynamic%20and%20control%20theory/2021/08/26/Method-of-Calculating-a-Dominant-Equation-by-Lagrangian-Dynamics-Using-Python.html</link>
+				<guid isPermaLink="true">https://SnovvyOwl.github.io/dynamic%20and%20control%20theory/2021/08/26/Method-of-Calculating-a-Dominant-Equation-by-Lagrangian-Dynamics-Using-Python.html</guid>
+			</item>
+		
+			<item>
 				<title>Calculate system by openCV mat class[cv::Mat]</title>
 				
 				

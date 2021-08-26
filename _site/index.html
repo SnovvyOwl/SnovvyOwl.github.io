@@ -270,16 +270,16 @@ If you want to have a static message in your intro layout, disable the dynamic-t
         
         <h4> <strong> 26 Aug 2021 </strong>
           <small>.
-            <a class="category" href="/categories/khu-kongbot.html">
-              KHU-KongBot
+            <a class="category" href="/categories/dynamic and control theory.html">
+              Dynamic and Control Theory
             </a>
           .</small>
-          <strong> <a href="/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html">Calculate system by openCV mat class[cv::Mat] </a> </strong>
-          <small> <a href="/khu-kongbot/2021/08/26/Calculate-system-by-openCV-mat-class.html#disqus_thread">Comments</a></small>
+          <strong> <a href="/dynamic%20and%20control%20theory/2021/08/26/Method-of-Calculating-a-Dominant-Equation-by-Lagrangian-Dynamics-Using-Python.html">Method of Calculating a Dominant Equation by Lagrangian Dynamics Using Python </a> </strong>
+          <small> <a href="/dynamic%20and%20control%20theory/2021/08/26/Method-of-Calculating-a-Dominant-Equation-by-Lagrangian-Dynamics-Using-Python.html#disqus_thread">Comments</a></small>
         </h4>
 
         <section class="text-justify">
-          <p>KHU-KongBot2 프로젝트를 진행하다보니 센서의 데이터와 실제 로봇의 모델을 계산해서 현재의 로봇의 상태를 추정하는 칼만필터를 사용할 필요가 생겼다.</p> <p>하지만 c++ 에 기본 라이브러리에서는 Matrix 클래스는 존재 하지 않으니 실재로 구현을 해보았는데, 직접 짜고 보니 굉장히 무거워 보였다.</p> <p>직접 작성한 Matrix 클래스 수치해석적인 inv() 메서드도 열심히 구현해 보았지만 조금 더 최적화 잘된 라이브러리를 찾아보았다.</p> <p>그러다가 머리를 스친게 하나 있었다.</p> <p>요즘 컴퓨터비전쪽으로 공부를 하다보니 생각이 난 것이데 이미지 파일이 python에서는 2차원(또는 3차원) numpy array 로 구성되어 있다는 것이다.</p> <p>따라서 이미지 처리하는 C++ 라이브러리인 OpenCV가 떠올랐다. 이미 나의 프로젝트에서는 OpenCV를 이용하고 있었으므로 이를 그냥 사용만 하면 되는 것이다.</p> <p>이번에 사용하면서...
+          <p>로봇에 대해 공부하다보면 정형화된 6축 매뉴퓰레이터가 아닌 다양한 로봇을 설계할 때가 있다.</p> <p>프로젝트로 진행하고 있는 공모양 로봇이 그중 하나이다.</p> <p>이러한 로봇을 제어하는 로직을 짜거나 칼만필터를 사용하기 위해서는 로봇을 동역학(Dynamics)적으로 해석할 필요가 있다.</p> <p>로봇은 여러게의 요소가 연결되어 있어서 다물체 동역학(Multibody Dynamics)이다.</p> <p>이러한 다물체로 이루어진 시스템을 해석하는 방법으로는 가장 기본적으로 쓰이는 뉴턴방식, 가상일 (Virtual Works), 라그랑주 역학(Lagrangian Dynamics)의 방식이 있다.</p> <p>뉴턴방식은 간단한 시스템에서 주로 쓰이고 로봇과 같은 복잡한 시스템은 가상일과 라그랑주 역학으로 해석을 하게 된다.</p> <p>그중 라그랑주 역학은 내력을 구할 필요가 없는 장점이 있다.</p> <p>우리의 시스템도 라그랑주 역학으로 해석하기로 했다.</p> <p>그렇다면 우리의 시스템에 요소에 해당하는 에너지항을 구해보자</p> <p>from...
         </section>
 
         <h4><a href="/blog/">Archive</a></h4>
@@ -690,18 +690,6 @@ function addTohistory() {
 </script>
 
 <!-- Gesture Navigation / Swipe Instruction Start -->
-
-
-  
-
-  
-
-  
-
-  
-
-<!-- Gesture Navigation / Swipe Instruction End -->
-
 
 
 <!-- Javascript End -->
