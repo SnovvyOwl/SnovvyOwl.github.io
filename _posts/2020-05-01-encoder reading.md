@@ -82,7 +82,7 @@ wiringPiISR(PhaseB, INT_EDGE_BOTH, &Interrupt_B);
 ```c
 void Interrupt_A();
 void Interrupt_B();
-```c
+```
 는 인터럽트가 발생하면 구동되는 함수이다. 상의 변화에 따라 회전각을 측정한다.
 
 

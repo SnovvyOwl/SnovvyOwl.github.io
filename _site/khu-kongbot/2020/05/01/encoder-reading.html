@@ -574,6 +574,62 @@ function addTohistory() {
 <!-- Gesture Navigation / Swipe Instruction Start -->
 
 
+  
+
+    <!-- Post Gesture Navigation Start -->
+
+    <script type="text/javascript" src="/js/hammer.min.js"></script>
+
+    <script>
+      var post = document.getElementById('post');
+
+      new Hammer(post).on('swipeleft', function(event) {
+        addTohistory();
+        
+          document.location.replace("/khu-kongbot/2020/03/24/Raspberry-PI-with-C++.html");
+        
+      });
+
+      new Hammer(post).on('swiperight', function(event) {
+        addTohistory();
+        
+          document.location.replace("/khu-kongbot/2021/08/25/Socket-Communication.html");
+        
+      });
+    </script>
+
+    <!-- Post Gesture Navigation Start -->
+
+  
+
+  
+
+  
+
+  
+
+    <!-- Swipe Instructions for Post Start -->
+
+    <script>
+      $(document).ready(function(){
+        if(!localStorage.getItem('post-swipeshowed')){
+          $("#swipe-instruction").fadeIn();
+          $("#swipe-instruction .close-swipe-instruction").click(function(){
+            $("#swipe-instruction").fadeOut();
+          });
+          localStorage.setItem('post-swipeshowed', true);
+        }
+      });
+    </script>
+
+    <!-- Swipe Instructions for Post End -->
+
+  
+
+<!-- Gesture Navigation / Swipe Instruction End -->
+
+
+
 <!-- Javascript End -->
 
 
