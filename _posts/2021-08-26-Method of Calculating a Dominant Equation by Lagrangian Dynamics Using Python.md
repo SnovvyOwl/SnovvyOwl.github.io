@@ -22,11 +22,18 @@ tags: [ 'python']
 
 우리의 시스템도 라그랑주 역학으로 해석하기로 했다.
 
+# Lagrange Equation
+라그랑주 역학에 대해서 간략히 설명하겠다.
+$$\frac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q  $$
+
 그렇다면 우리의 시스템에 요소에 해당하는 에너지항을 구해보자 
 
+
+## Energy Term
 ![RobotSystem](/img/lagrangeanalysis.jpg )
+본 그림은 로봇의 시스템을 간략하게 그린 그림이다.
 
-
+## Code
 ```python
 from sympy import diff, Function, symbols, cos, sin, latex, simplify
 from sympy.physics.mechanics import *

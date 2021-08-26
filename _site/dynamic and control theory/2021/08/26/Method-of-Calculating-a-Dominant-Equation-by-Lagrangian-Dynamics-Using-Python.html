@@ -214,10 +214,17 @@
 
 <p>우리의 시스템도 라그랑주 역학으로 해석하기로 했다.</p>
 
+<h1 id="lagrange-equation">Lagrange Equation</h1>
+<p>라그랑주 역학에 대해서 간략히 설명하겠다.
+\(\frac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q\)</p>
+
 <p>그렇다면 우리의 시스템에 요소에 해당하는 에너지항을 구해보자</p>
 
-<p><img src="/img/lagrangeanalysis.jpg" alt="RobotSystem" /></p>
+<h2 id="energy-term">Energy Term</h2>
+<p><img src="/img/lagrangeanalysis.jpg" alt="RobotSystem" />
+본 그림은 로봇의 시스템을 간략하게 그린 그림이다.</p>
 
+<h2 id="code">Code</h2>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">diff</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">latex</span><span class="p">,</span> <span class="n">simplify</span>
 <span class="kn">from</span> <span class="nn">sympy.physics.mechanics</span> <span class="kn">import</span> <span class="o">*</span>
 
