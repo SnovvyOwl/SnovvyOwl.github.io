@@ -7,124 +7,92 @@ tags: [ 'python']
 use_math: true
 ---
 
-로봇에 대해 공부하다보면 정형화된 6축 매뉴퓰레이터가 아닌 다양한 로봇을 설계할 때가 있다. 
-
-프로젝트로 진행하고 있는 공모양 로봇이 그중 하나이다. 
-
-이러한 로봇을 제어하는 로직을 짜거나 칼만필터를 사용하기 위해서는 로봇을 동역학(Dynamics)적으로 해석할 필요가 있다.
-
-로봇은 여러게의 요소가 연결되어 있어서 다물체 동역학(Multibody Dynamics)이다.
-
-이러한 다물체로 이루어진 시스템을 해석하는 방법으로는 가장 기본적으로 쓰이는 뉴턴방식, 가상일 (Virtual Works), 라그랑주 역학(Lagrangian Dynamics)의 방식이 있다.
-
-뉴턴방식은 간단한 시스템에서 주로 쓰이고 로봇과 같은 복잡한 시스템은 가상일과 라그랑주 역학으로 해석을 하게 된다.
-
-그중 라그랑주 역학은 내력을 구할 필요가 없는 장점이 있다.
-
-우리의 시스템도 라그랑주 역학으로 해석하기로 했다.
+로봇에 대해 공부하다보면 정형화된 6축 매뉴퓰레이터가 아닌 다양한 로봇을 설계할 때가 있다.\ 
+프로젝트로 진행하고 있는 공모양 로봇이 그중 하나이다.\ 
+이러한 로봇을 제어하는 로직을 짜거나 칼만필터를 사용하기 위해서는 로봇을 동역학(Dynamics)적으로 해석할 필요가 있다.\
+로봇은 여러게의 요소가 연결되어 있어서 다물체 동역학(Multibody Dynamics)이다.\
+이러한 다물체로 이루어진 시스템을 해석하는 방법으로는 가장 기본적으로 쓰이는 뉴턴방식, 가상일 (Virtual Works), 라그랑주 역학(Lagrangian Dynamics)의 방식이 있다.\
+뉴턴방식은 간단한 시스템에서 주로 쓰이고 로봇과 같은 복잡한 시스템은 가상일과 라그랑주 역학으로 해석을 하게 된다.\
+그중 라그랑주 역학은 내력을 구할 필요가 없는 장점이 있다.\
+우리의 시스템도 라그랑주 역학으로 해석하기로 했다.\
 
 # Lagrange Equation
-라그랑주 역학에 대해서 간략히 설명하겠다.
+라그랑주 역학에 대해서 간략히 설명하겠다.\
+$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q  $ \
+보존계에서는 $ Q = 0$ 이므로 라그랑주 방정식은 아래와 같다.\
+$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=0  $ \
+$L$은 각 바디별로 운동에너지에서 위치에너지를 뺀 식이다.\
+$q$는 자유도(독립적인 좌표)라고 보면 된다.\ 
 
-$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q  $ 
 
-보존계에서는 $ Q = 0$ 이므로 라그랑주 방정식은 아래와 같다.
-
-$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=0  $ 
-
-$L$은 각 바디별로 운동에너지에서 위치에너지를 뺀 식이다.
-
-$q$는 자유도(독립적인 좌표)라고 보면 된다. 
-
-KHU-kongbot에 에너지항을 구해보자 
-
+KHU-kongbot에 에너지항을 구해보자 \
 ## Energy Term
 ![RobotSystem](/img/lagrangeanalysis.jpg )
-본 그림은 로봇의 시스템을 간략하게 그린 그림이다.
-
-먼저 우리 시스템이 직선으로 주행하는 상황에서 2차원적인 해석을 하고자한다.
-
-로봇의 중심과 Global 좌표에서 로봇의 중심의 좌표는 $[x,y,0]^T$이다. 
-
-즉 로봇의 Z축 좌표는 0이다.
-
+본 그림은 로봇의 시스템을 간략하게 그린 그림이다.\
+먼저 우리 시스템이 직선으로 주행하는 상황에서 2차원적인 해석을 하고자한다.\
+로봇의 중심과 Global 좌표에서 로봇의 중심의 좌표는 $[x,y,0]^T$이다. \
+즉 로봇의 Z축 좌표는 0이다.\
 이 시스템에서 물체(Body)는 3개다.
 
-1. Shell(껍데기)
-2. IDU(내부 구동 유닛)
-3. Pendulums(진자추)
+1) Shell(껍데기)\
+2) IDU(내부 구동 유닛)\
+3) Pendulums(진자추)
 
-이를 해석하기 위해선 두가지 가정이 필요하다.
-1. 로봇의 내부 구동유닛(IDU)는 PID 제어로 어떻게든 앞을 본다고 가정하자. (원안에 네모 박스)
-2. 직진 주행중이므로 오른쪽 펜듈럼과 왼쪽 펜듈럼은 같은 각도로 움직인다.
+이를 해석하기 위해선 두가지 가정이 필요하다.\
+1) 로봇의 내부 구동유닛(IDU)는 PID 제어로 어떻게든 앞을 본다고 가정하자. (원안에 네모 박스)\
+2) 진 주행중이므로 오른쪽 펜듈럼과 왼쪽 펜듈럼은 같은 각도로 움직인다.
 
 
 
 $q$ 에 해당하는 자유도는 2개 이다.
 
-하나는 껍데기 (Shell) 의 회전각과 진자추(Pendulums)의 회전각도이다.
-
+하나는 껍데기 (Shell) 의 회전각과 진자추(Pendulums)의 회전각도이다.\
 이를  $ \theta_{s}$, $\theta_{p} $ 이라고 하자
 
+
 이렇게 하나하나 첨자를 둬서 파라미터를 정의 하면 아래와 같다.
-
 ## parmeter
-$ m_{s}$ = mass of Shell
+$ m_{s}$ = mass of Shell\
+$m_{i}$ = mass of IDU\
+$m_{p}$ = mass of pendulums\
+$R_{s}$ =  Radius of Shell (Scala)\
+$J_{s}$ = inertia of Shell\
+$J_{i}$ = inertia of IDU\
+$J_{p}$ = inertia of pendulums (rotational axis)\
+$g$ = gravity accelation (scala)\
+$l_{p}$ = length of pendulums C.M to rotational Axis\
+$\theta_{s}$ = angle of Shell (Global Frame)\
+$\theta_{p}$ =angle of pendulums (Global Frame)\
+$r_{pm}= length of Motor Axis to Center of Shell\
 
-$m_{i}$ = mass of IDU
-
-$m_{p}$ = mass of pendulums
-
-$R_{s}$ =  Radius of Shell (Scala)
-
-$J_{s}$ = inertia of Shell
-
-$J_{i}$ = inertia of IDU
-
-$J_{p}$ = inertia of pendulums (rotational axis)
-
-$g$ = gravity accelation (scala)
-
-$l_{p}$ = length of pendulums C.M to rotational Axis
-
-$\theta_{s}$ = angle of Shell (Global Frame)
-
-$\theta_{p}$ =angle of pendulums (Global Frame)$
-
-$r_{pm}= length of Motor Axis to Center of Shell
-먼저  Body 1인 Shell의 운동에너지를 구해보자
-
-로봇은 $R_{s}\dot{\theta_{s}}$의 속도로 전진하고 있다.
+먼저  Body 1인 Shell의 운동에너지를 구해보자\
+로봇은 $R_{s}\dot{\theta_{s}}$의 속도로 전진하고 있다.\
 
 
 ## Shell
 Shell의 관성모멘트를 $J_s$라 할때
-
-### Shell의 운동에너지 : $T_s=\cfrac{1}{2}m_{s}(R_s \theta_{s})^2 + \cfrac{1}{2} J_s \theta_{s}^2$
-
-### Shell의 위치에너지 : $U_s=0$ 
+Shell의 운동에너지 : $T_s=\cfrac{1}{2}m_{s}(R_s \theta_{s})^2 + \cfrac{1}{2} J_s \theta_{s}^2$\
+Shell의 위치에너지 : $U_s=0$ 
 (Z축 좌표가 0이므로)
 
-## IDU
 
-### IDU의 운동에너지 : $T_i=\cfrac{1}{2}m_{i}(R_s \theta_{s})^2 $
+## IDU
+IDU의 운동에너지 : $T_i=\cfrac{1}{2}m_{i}(R_s \theta_{s})^2 $
 (회전하지 않으므로 회전과 관련된 운동에너지가 0이다.)
-### IDU의 위치에너지 : $U_i=0$ 
+IDU의 위치에너지 : $U_i=0$ 
 (IDU의 무게 중심이 구의 중심이 되겠끔 설계를 했다.)
 
+
 ## Pendulums
-
-### Pendulums의 운동에너지 : $T_p=\cfrac{1}{2}m_{p}(R_s \theta_{s})^2 + \cfrac{1}{2} J_p\theta_{p}^2$
-
-### Pendulums의 위치에너지 : $U_p= -m_p  g l_p cos(\theta_p)-m_p g r_{pm}$ 
+Pendulums의 운동에너지 : $T_p=\cfrac{1}{2}m_{p}(R_s \theta_{s})^2 + \cfrac{1}{2} J_p\theta_{p}^2$\
+Pendulums의 위치에너지 : $U_p= -m_p  g l_p cos(\theta_p)-m_p g r_{pm}$ 
 
 ## $L=T-U$ 이므로
 
 
 $L=\cfrac{1}{2}m_{s}(R_s \theta_{s})^2 + \cfrac{1}{2} J_s \theta_{s}^2+\cfrac{1}{2}m_{p}(R_s \theta_{s})^2 + \cfrac{1}{2} J_p\theta_{p}^2+\cfrac{1}{2}m_{i}(R_s \theta_{s})^2+ -m_p  g l_p cos(\theta_p)-m_p g r_{pm}$
 
-수식이 간단한 편이라 손으로 풀어도 괜찮지만 조금이라도 빠른 계산을 위해서 이를 파이썬으로 계산해 보겠다.
-
+수식이 간단한 편이라 손으로 풀어도 괜찮지만 조금이라도 빠른 계산을 위해서 이를 파이썬으로 계산해 보겠다.\
 이를 계산하기 위해 sympy를 이용하기로 했다.
 ```python
 from sympy import diff, Function, symbols, cos, sin, latex, simplify

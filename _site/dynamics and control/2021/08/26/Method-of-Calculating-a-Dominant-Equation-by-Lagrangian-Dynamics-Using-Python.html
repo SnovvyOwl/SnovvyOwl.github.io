@@ -226,125 +226,85 @@
           </h4>
           
           <section class="text-justify">
-            <p>로봇에 대해 공부하다보면 정형화된 6축 매뉴퓰레이터가 아닌 다양한 로봇을 설계할 때가 있다.</p>
-
-<p>프로젝트로 진행하고 있는 공모양 로봇이 그중 하나이다.</p>
-
-<p>이러한 로봇을 제어하는 로직을 짜거나 칼만필터를 사용하기 위해서는 로봇을 동역학(Dynamics)적으로 해석할 필요가 있다.</p>
-
-<p>로봇은 여러게의 요소가 연결되어 있어서 다물체 동역학(Multibody Dynamics)이다.</p>
-
-<p>이러한 다물체로 이루어진 시스템을 해석하는 방법으로는 가장 기본적으로 쓰이는 뉴턴방식, 가상일 (Virtual Works), 라그랑주 역학(Lagrangian Dynamics)의 방식이 있다.</p>
-
-<p>뉴턴방식은 간단한 시스템에서 주로 쓰이고 로봇과 같은 복잡한 시스템은 가상일과 라그랑주 역학으로 해석을 하게 된다.</p>
-
-<p>그중 라그랑주 역학은 내력을 구할 필요가 없는 장점이 있다.</p>
-
-<p>우리의 시스템도 라그랑주 역학으로 해석하기로 했다.</p>
+            <p>로봇에 대해 공부하다보면 정형화된 6축 매뉴퓰레이터가 아닌 다양한 로봇을 설계할 때가 있다.\ 
+프로젝트로 진행하고 있는 공모양 로봇이 그중 하나이다.\ 
+이러한 로봇을 제어하는 로직을 짜거나 칼만필터를 사용하기 위해서는 로봇을 동역학(Dynamics)적으로 해석할 필요가 있다.<br />
+로봇은 여러게의 요소가 연결되어 있어서 다물체 동역학(Multibody Dynamics)이다.<br />
+이러한 다물체로 이루어진 시스템을 해석하는 방법으로는 가장 기본적으로 쓰이는 뉴턴방식, 가상일 (Virtual Works), 라그랑주 역학(Lagrangian Dynamics)의 방식이 있다.<br />
+뉴턴방식은 간단한 시스템에서 주로 쓰이고 로봇과 같은 복잡한 시스템은 가상일과 라그랑주 역학으로 해석을 하게 된다.<br />
+그중 라그랑주 역학은 내력을 구할 필요가 없는 장점이 있다.<br />
+우리의 시스템도 라그랑주 역학으로 해석하기로 했다.\</p>
 
 <h1 id="lagrange-equation">Lagrange Equation</h1>
-<p>라그랑주 역학에 대해서 간략히 설명하겠다.</p>
+<p>라그랑주 역학에 대해서 간략히 설명하겠다.<br />
+$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q  $ <br />
+보존계에서는 $ Q = 0$ 이므로 라그랑주 방정식은 아래와 같다.<br />
+$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=0  $ <br />
+$L$은 각 바디별로 운동에너지에서 위치에너지를 뺀 식이다.<br />
+$q$는 자유도(독립적인 좌표)라고 보면 된다.\</p>
 
-<p>$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q  $</p>
-
-<p>보존계에서는 $ Q = 0$ 이므로 라그랑주 방정식은 아래와 같다.</p>
-
-<p>$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=0  $</p>
-
-<p>$L$은 각 바디별로 운동에너지에서 위치에너지를 뺀 식이다.</p>
-
-<p>$q$는 자유도(독립적인 좌표)라고 보면 된다.</p>
-
-<p>KHU-kongbot에 에너지항을 구해보자</p>
-
+<p>KHU-kongbot에 에너지항을 구해보자 \</p>
 <h2 id="energy-term">Energy Term</h2>
 <p><img src="/img/lagrangeanalysis.jpg" alt="RobotSystem" />
-본 그림은 로봇의 시스템을 간략하게 그린 그림이다.</p>
+본 그림은 로봇의 시스템을 간략하게 그린 그림이다.<br />
+먼저 우리 시스템이 직선으로 주행하는 상황에서 2차원적인 해석을 하고자한다.<br />
+로봇의 중심과 Global 좌표에서 로봇의 중심의 좌표는 $[x,y,0]^T$이다. <br />
+즉 로봇의 Z축 좌표는 0이다.<br />
+이 시스템에서 물체(Body)는 3개다.</p>
 
-<p>먼저 우리 시스템이 직선으로 주행하는 상황에서 2차원적인 해석을 하고자한다.</p>
+<p>1) Shell(껍데기)<br />
+2) IDU(내부 구동 유닛)<br />
+3) Pendulums(진자추)</p>
 
-<p>로봇의 중심과 Global 좌표에서 로봇의 중심의 좌표는 $[x,y,0]^T$이다.</p>
-
-<p>즉 로봇의 Z축 좌표는 0이다.</p>
-
-<p>이 시스템에서 물체(Body)는 3개다.</p>
-
-<ol>
-  <li>Shell(껍데기)</li>
-  <li>IDU(내부 구동 유닛)</li>
-  <li>Pendulums(진자추)</li>
-</ol>
-
-<p>이를 해석하기 위해선 두가지 가정이 필요하다.</p>
-<ol>
-  <li>로봇의 내부 구동유닛(IDU)는 PID 제어로 어떻게든 앞을 본다고 가정하자. (원안에 네모 박스)</li>
-  <li>직진 주행중이므로 오른쪽 펜듈럼과 왼쪽 펜듈럼은 같은 각도로 움직인다.</li>
-</ol>
+<p>이를 해석하기 위해선 두가지 가정이 필요하다.<br />
+1) 로봇의 내부 구동유닛(IDU)는 PID 제어로 어떻게든 앞을 본다고 가정하자. (원안에 네모 박스)<br />
+2) 진 주행중이므로 오른쪽 펜듈럼과 왼쪽 펜듈럼은 같은 각도로 움직인다.</p>
 
 <p>$q$ 에 해당하는 자유도는 2개 이다.</p>
 
-<p>하나는 껍데기 (Shell) 의 회전각과 진자추(Pendulums)의 회전각도이다.</p>
-
-<p>이를  $ \theta_{s}$, $\theta_{p} $ 이라고 하자</p>
+<p>하나는 껍데기 (Shell) 의 회전각과 진자추(Pendulums)의 회전각도이다.<br />
+이를  $ \theta_{s}$, $\theta_{p} $ 이라고 하자</p>
 
 <p>이렇게 하나하나 첨자를 둬서 파라미터를 정의 하면 아래와 같다.</p>
-
 <h2 id="parmeter">parmeter</h2>
-<p>$ m_{s}$ = mass of Shell</p>
+<p>$ m_{s}$ = mass of Shell<br />
+$m_{i}$ = mass of IDU<br />
+$m_{p}$ = mass of pendulums<br />
+$R_{s}$ =  Radius of Shell (Scala)<br />
+$J_{s}$ = inertia of Shell<br />
+$J_{i}$ = inertia of IDU<br />
+$J_{p}$ = inertia of pendulums (rotational axis)<br />
+$g$ = gravity accelation (scala)<br />
+$l_{p}$ = length of pendulums C.M to rotational Axis<br />
+$\theta_{s}$ = angle of Shell (Global Frame)<br />
+$\theta_{p}$ =angle of pendulums (Global Frame)<br />
+$r_{pm}= length of Motor Axis to Center of Shell\</p>
 
-<p>$m_{i}$ = mass of IDU</p>
-
-<p>$m_{p}$ = mass of pendulums</p>
-
-<p>$R_{s}$ =  Radius of Shell (Scala)</p>
-
-<p>$J_{s}$ = inertia of Shell</p>
-
-<p>$J_{i}$ = inertia of IDU</p>
-
-<p>$J_{p}$ = inertia of pendulums (rotational axis)</p>
-
-<p>$g$ = gravity accelation (scala)</p>
-
-<p>$l_{p}$ = length of pendulums C.M to rotational Axis</p>
-
-<p>$\theta_{s}$ = angle of Shell (Global Frame)</p>
-
-<p>$\theta_{p}$ =angle of pendulums (Global Frame)$</p>
-
-<p>$r_{pm}= length of Motor Axis to Center of Shell
-먼저  Body 1인 Shell의 운동에너지를 구해보자</p>
-
-<p>로봇은 $R_{s}\dot{\theta_{s}}$의 속도로 전진하고 있다.</p>
+<p>먼저  Body 1인 Shell의 운동에너지를 구해보자<br />
+로봇은 $R_{s}\dot{\theta_{s}}$의 속도로 전진하고 있다.\</p>
 
 <h2 id="shell">Shell</h2>
-<p>Shell의 관성모멘트를 $J_s$라 할때</p>
-
-<h3 id="shell의-운동에너지--t_scfrac12m_sr_s-theta_s2--cfrac12-j_s-theta_s2">Shell의 운동에너지 : $T_s=\cfrac{1}{2}m_{s}(R_s \theta_{s})^2 + \cfrac{1}{2} J_s \theta_{s}^2$</h3>
-
-<h3 id="shell의-위치에너지--u_s0">Shell의 위치에너지 : $U_s=0$</h3>
-<p>(Z축 좌표가 0이므로)</p>
+<p>Shell의 관성모멘트를 $J_s$라 할때
+Shell의 운동에너지 : $T_s=\cfrac{1}{2}m_{s}(R_s \theta_{s})^2 + \cfrac{1}{2} J_s \theta_{s}^2$<br />
+Shell의 위치에너지 : $U_s=0$ 
+(Z축 좌표가 0이므로)</p>
 
 <h2 id="idu">IDU</h2>
-
-<h3 id="idu의-운동에너지--t_icfrac12m_ir_s-theta_s2-">IDU의 운동에너지 : $T_i=\cfrac{1}{2}m_{i}(R_s \theta_{s})^2 $</h3>
-<p>(회전하지 않으므로 회전과 관련된 운동에너지가 0이다.)</p>
-<h3 id="idu의-위치에너지--u_i0">IDU의 위치에너지 : $U_i=0$</h3>
-<p>(IDU의 무게 중심이 구의 중심이 되겠끔 설계를 했다.)</p>
+<p>IDU의 운동에너지 : $T_i=\cfrac{1}{2}m_{i}(R_s \theta_{s})^2 $
+(회전하지 않으므로 회전과 관련된 운동에너지가 0이다.)
+IDU의 위치에너지 : $U_i=0$ 
+(IDU의 무게 중심이 구의 중심이 되겠끔 설계를 했다.)</p>
 
 <h2 id="pendulums">Pendulums</h2>
-
-<h3 id="pendulums의-운동에너지--t_pcfrac12m_pr_s-theta_s2--cfrac12-j_ptheta_p2">Pendulums의 운동에너지 : $T_p=\cfrac{1}{2}m_{p}(R_s \theta_{s})^2 + \cfrac{1}{2} J_p\theta_{p}^2$</h3>
-
-<h3 id="pendulums의-위치에너지--u_p--m_p--g-l_p-costheta_p-m_p-g-r_pm">Pendulums의 위치에너지 : $U_p= -m_p  g l_p cos(\theta_p)-m_p g r_{pm}$</h3>
+<p>Pendulums의 운동에너지 : $T_p=\cfrac{1}{2}m_{p}(R_s \theta_{s})^2 + \cfrac{1}{2} J_p\theta_{p}^2$<br />
+Pendulums의 위치에너지 : $U_p= -m_p  g l_p cos(\theta_p)-m_p g r_{pm}$</p>
 
 <h2 id="lt-u-이므로">$L=T-U$ 이므로</h2>
 
 <p>$L=\cfrac{1}{2}m_{s}(R_s \theta_{s})^2 + \cfrac{1}{2} J_s \theta_{s}^2+\cfrac{1}{2}m_{p}(R_s \theta_{s})^2 + \cfrac{1}{2} J_p\theta_{p}^2+\cfrac{1}{2}m_{i}(R_s \theta_{s})^2+ -m_p  g l_p cos(\theta_p)-m_p g r_{pm}$</p>
 
-<p>수식이 간단한 편이라 손으로 풀어도 괜찮지만 조금이라도 빠른 계산을 위해서 이를 파이썬으로 계산해 보겠다.</p>
-
-<p>이를 계산하기 위해 sympy를 이용하기로 했다.</p>
+<p>수식이 간단한 편이라 손으로 풀어도 괜찮지만 조금이라도 빠른 계산을 위해서 이를 파이썬으로 계산해 보겠다.<br />
+이를 계산하기 위해 sympy를 이용하기로 했다.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">diff</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">latex</span><span class="p">,</span> <span class="n">simplify</span>
 <span class="kn">from</span> <span class="nn">sympy.physics.mechanics</span> <span class="kn">import</span> <span class="o">*</span>
 </code></pre></div></div>
