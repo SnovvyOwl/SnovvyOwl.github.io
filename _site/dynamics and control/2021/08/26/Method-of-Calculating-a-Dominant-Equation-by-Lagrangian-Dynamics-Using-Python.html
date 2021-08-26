@@ -247,18 +247,135 @@
 
 <p>$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=Q  $</p>
 
-<p>보존계에서는 $ Q = 0$ 이므로 라그랑주 방정식은 아래와 같다.
-$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=0  $</p>
+<p>보존계에서는 $ Q = 0$ 이므로 라그랑주 방정식은 아래와 같다.</p>
 
-<p>그렇다면 여기서 $L$과 $q$는 무엇이냐면 
-q는 장
-그렇다면 우리의 시스템에 요소에 해당하는 에너지항을 구해보자</p>
+<p>$ \cfrac{d}{dt} \cfrac{\partial L }{\partial \dot{q}}-\cfrac{\partial L }{\partial q}=0  $</p>
+
+<p>$L$은 각 바디별로 운동에너지에서 위치에너지를 뺀 식이다.</p>
+
+<p>$q$는 자유도(독립적인 좌표)라고 보면 된다.</p>
+
+<p>KHU-kongbot에 에너지항을 구해보자</p>
 
 <h2 id="energy-term">Energy Term</h2>
 <p><img src="/img/lagrangeanalysis.jpg" alt="RobotSystem" />
 본 그림은 로봇의 시스템을 간략하게 그린 그림이다.</p>
 
-<h2 id="code">Code</h2>
+<p>먼저 우리 시스템이 직선으로 주행하는 상황에서 2차원적인 해석을 하고자한다.</p>
+
+<p>로봇의 중심과 Global 좌표에서 로봇의 중심의 좌표는 $[x,y,0]^T$이다.</p>
+
+<p>즉 로봇의 Z축 좌표는 0이다.</p>
+
+<p>이 시스템에서 물체(Body)는 3개다.</p>
+
+<ol>
+  <li>Shell(껍데기)</li>
+  <li>IDU(내부 구동 유닛)</li>
+  <li>Pendulums(진자추)</li>
+</ol>
+
+<p>이를 해석하기 위해선 두가지 가정이 필요하다.</p>
+<ol>
+  <li>로봇의 내부 구동유닛(IDU)는 PID 제어로 어떻게든 앞을 본다고 가정하자. (원안에 네모 박스)</li>
+  <li>직진 주행중이므로 오른쪽 펜듈럼과 왼쪽 펜듈럼은 같은 각도로 움직인다.</li>
+</ol>
+
+<p>$q$ 에 해당하는 자유도는 2개 이다.</p>
+
+<p>하나는 껍데기 (Shell) 의 회전각과 진자추(Pendulums)의 회전각도이다.</p>
+
+<p>이를  $ \theta_{s}$, $\theta_{p} $ 이라고 하자</p>
+
+<p>이렇게 하나하나 첨자를 둬서 파라미터를 정의 하면 아래와 같다.</p>
+
+<h2 id="parmeter">parmeter</h2>
+<p>$ m_{s}$ = mass of Shell</p>
+
+<p>$m_{i}$ = mass of IDU</p>
+
+<p>$m_{p}$ = mass of pendulums</p>
+
+<p>$R_{s}$ =  Radius of Shell (Scala)</p>
+
+<p>$J_{s}$ = inertia of Shell</p>
+
+<p>$J_{i}$ = inertia of IDU</p>
+
+<p>$J_{p}$ = inertia of pendulums (rotational axis)</p>
+
+<p>$g$ = gravity accelation (scala)</p>
+
+<p>$l_{p}$ = length of pendulums C.M to rotational Axis</p>
+
+<p>$\theta_{s}$ = angle of Shell (Global Frame)</p>
+
+<p>$\theta_{p}$ =angle of pendulums (Global Frame)$</p>
+
+<p>$r_{pm}= length of Motor Axis to Center of Shell
+먼저  Body 1인 Shell의 운동에너지를 구해보자</p>
+
+<p>로봇은 $R_{s}\dot{\theta_{s}}$의 속도로 전진하고 있다.</p>
+
+<h2 id="shell">Shell</h2>
+<p>Shell의 관성모멘트를 $J_s$라 할때</p>
+
+<h3 id="shell의-운동에너지--t_scfrac12m_sr_s-theta_s2--cfrac12-j_s-theta_s2">Shell의 운동에너지 : $T_s=\cfrac{1}{2}m_{s}(R_s \theta_{s})^2 + \cfrac{1}{2} J_s \theta_{s}^2$</h3>
+
+<h3 id="shell의-위치에너지--u_s0">Shell의 위치에너지 : $U_s=0$</h3>
+<p>(Z축 좌표가 0이므로)</p>
+
+<h2 id="idu">IDU</h2>
+
+<h3 id="idu의-운동에너지--t_icfrac12m_ir_s-theta_s2-">IDU의 운동에너지 : $T_i=\cfrac{1}{2}m_{i}(R_s \theta_{s})^2 $</h3>
+<p>(회전하지 않으므로 회전과 관련된 운동에너지가 0이다.)</p>
+<h3 id="idu의-위치에너지--u_i0">IDU의 위치에너지 : $U_i=0$</h3>
+<p>(IDU의 무게 중심이 구의 중심이 되겠끔 설계를 했다.)</p>
+
+<h2 id="pendulums">Pendulums</h2>
+
+<h3 id="pendulums의-운동에너지--t_pcfrac12m_pr_s-theta_s2--cfrac12-j_ptheta_p2">Pendulums의 운동에너지 : $T_p=\cfrac{1}{2}m_{p}(R_s \theta_{s})^2 + \cfrac{1}{2} J_p\theta_{p}^2$</h3>
+
+<h3 id="pendulums의-위치에너지--u_p--m_p--g-l_p-costheta_p-m_p-g-r_pm">Pendulums의 위치에너지 : $U_p= -m_p  g l_p cos(\theta_p)-m_p g r_{pm}$</h3>
+
+<h2 id="lt-u-이므로">$L=T-U$ 이므로</h2>
+
+<p>$L=\cfrac{1}{2}m_{s}(R_s \theta_{s})^2 + \cfrac{1}{2} J_s \theta_{s}^2+\cfrac{1}{2}m_{p}(R_s \theta_{s})^2 + \cfrac{1}{2} J_p\theta_{p}^2+\cfrac{1}{2}m_{i}(R_s \theta_{s})^2+ -m_p  g l_p cos(\theta_p)-m_p g r_{pm}$</p>
+
+<p>수식이 간단한 편이라 손으로 풀어도 괜찮지만 조금이라도 빠른 계산을 위해서 이를 파이썬으로 계산해 보겠다.</p>
+
+<p>이를 계산하기 위해 sympy를 이용하기로 했다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">diff</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">latex</span><span class="p">,</span> <span class="n">simplify</span>
+<span class="kn">from</span> <span class="nn">sympy.physics.mechanics</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre></div></div>
+<p>sympy.latex을 import한 이유는 이를 Latex로 출력하고 싶기 때문이다.
+그리고 가장 중요한게 sympy.physics.mechanics인데 라그랑주 역학을 계산할 수 있게 해주는 메서드가 포함되어 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># variable define
+</span><span class="n">ms</span><span class="p">,</span> <span class="n">mi</span><span class="p">,</span> <span class="n">mp</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">Js</span><span class="p">,</span>  <span class="n">Jp</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">lp</span><span class="p">,</span> <span class="n">rpm</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s">"m_{s} m_{i} m_{p} R_{s} J_{s} J_{p} t g l_{p} r_{pm}"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>변수를 symbols로 선언해주고 오른쪽에 있는 symbols()안에 파라미터로 들어간 string 은 앞에 있는 symbols에서 연결되어 있는 latex이다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">th_s</span><span class="p">,</span>  <span class="n">th_p</span> <span class="o">=</span> <span class="n">dynamicsymbols</span><span class="p">(</span><span class="s">"</span><span class="se">\\</span><span class="s">theta_{s} </span><span class="se">\\</span><span class="s">theta_{p}"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>자유도인 두가지항은 미분을 해야하닌 다이나믹 심볼로 선언해준다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Ts</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">ms</span> <span class="o">*</span> <span class="p">(</span><span class="n">Rs</span> <span class="o">*</span> <span class="n">th_s</span><span class="p">.</span><span class="n">diff</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Js</span> <span class="o">*</span> <span class="n">th_s</span><span class="p">.</span><span class="n">diff</span><span class="p">()</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">Ti</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mi</span> <span class="o">*</span> <span class="p">(</span><span class="n">Rs</span> <span class="o">*</span> <span class="n">th_s</span><span class="p">.</span><span class="n">diff</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">Tp</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mp</span> <span class="o">*</span> <span class="p">(</span><span class="n">Rs</span> <span class="o">*</span> <span class="n">th_s</span><span class="p">.</span><span class="n">diff</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Jp</span> <span class="o">*</span> <span class="n">th_p</span><span class="p">.</span><span class="n">diff</span><span class="p">()</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">Ts</span> <span class="o">+</span> <span class="n">Ti</span> <span class="o">+</span> <span class="n">Tp</span>
+<span class="n">U</span> <span class="o">=</span> <span class="o">-</span><span class="n">mp</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">lp</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">th_p</span><span class="p">)</span><span class="o">-</span><span class="n">mp</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">rpm</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">T</span> <span class="o">-</span> <span class="n">U</span>
+</code></pre></div></div>
+<p>위에서 계산해준 것을 똑같이 계산해주는 코드이다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LM</span> <span class="o">=</span> <span class="n">LagrangesMethod</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="p">[</span><span class="n">th_s</span><span class="p">,</span> <span class="n">th_p</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">latex</span><span class="p">(</span><span class="n">simplify</span><span class="p">(</span><span class="n">LM</span><span class="p">.</span><span class="n">form_lagranges_equations</span><span class="p">())))</span>
+</code></pre></div></div>
+<p>sympy.physics.mechanics.LagrangesMethod() 한줄로 라그랑주 역학이 계산된다.
+그리고 이를 Latex 형식으로 출력해주는 코드다.</p>
+
+<h1 id="code">Code</h1>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">diff</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">latex</span><span class="p">,</span> <span class="n">simplify</span>
 <span class="kn">from</span> <span class="nn">sympy.physics.mechanics</span> <span class="kn">import</span> <span class="o">*</span>
 
@@ -275,11 +392,7 @@ q는 장
     g = gravity accelation (scala)
     l_{p}= length of pendulums C.M to rotational Axis
     </span><span class="se">\\</span><span class="s">theta_{s}= angle of Shell (Global Frame)
-    </span><span class="se">\\</span><span class="s">theta_{im}= angle of IDU motor (Shell Frame)
-    </span><span class="se">\\</span><span class="s">theta_{pm}=angle of pendulum motors (IDU Frame)
-
-    </span><span class="se">\\</span><span class="s">theta_{i}=</span><span class="se">\\</span><span class="s">theta_{im}+</span><span class="se">\\</span><span class="s">theta_{s}                        (Global Frame)
-    </span><span class="se">\\</span><span class="s">theta_{p}=</span><span class="se">\\</span><span class="s">theta_{im}+</span><span class="se">\\</span><span class="s">theta_{s}+</span><span class="se">\\</span><span class="s">theta_{pm}           (Global Frame)
+    </span><span class="se">\\</span><span class="s">theta_{p}=angle of pendulums        (Global Frame)
 """</span>
 
 <span class="n">th_s</span><span class="p">,</span>  <span class="n">th_p</span> <span class="o">=</span> <span class="n">dynamicsymbols</span><span class="p">(</span><span class="s">"</span><span class="se">\\</span><span class="s">theta_{s} </span><span class="se">\\</span><span class="s">theta_{p}"</span><span class="p">)</span>
@@ -293,6 +406,14 @@ q는 장
 <span class="n">LM</span> <span class="o">=</span> <span class="n">LagrangesMethod</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="p">[</span><span class="n">th_s</span><span class="p">,</span> <span class="n">th_p</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="n">latex</span><span class="p">(</span><span class="n">simplify</span><span class="p">(</span><span class="n">LM</span><span class="p">.</span><span class="n">form_lagranges_equations</span><span class="p">())))</span>
 </code></pre></div></div>
+
+<h1 id="result">Result</h1>
+<pre><code class="language-dotnetcli">\left[\begin{matrix}1.0 \left(J_{s} + R_{s}^{2} m_{i} + R_{s}^{2} m_{p} + R_{s}^{2} m_{s}\right) \frac{d^{2}}{d t^{2}} \theta_{s}{\left(t \right)}\\1.0 J_{p} \frac{d^{2}}{d t^{2}} \theta_{p}{\left(t \right)} + g l_{p} m_{p} \sin{\left(\theta_{p}{\left(t \right)} \right)}\end{matrix}\right]
+</code></pre>
+
+<p>$\left[\begin{matrix}1.0 \left(J_{s} + R_{s}^{2} m_{i} + R_{s}^{2} m_{p} + R_{s}^{2} m_{s}\right) \frac{d^{2}}{d t^{2}} \theta_{s}{\left(t \right)}\1.0 J_{p} \frac{d^{2}}{d t^{2}} \theta_{p}{\left(t \right)} + g l_{p} m_{p} \sin{\left(\theta_{p}{\left(t \right)} \right)}\end{matrix}\right]$</p>
+
+<p>이렇게 모든 결과가 계산되서 나온다.</p>
 
           </section>
 
