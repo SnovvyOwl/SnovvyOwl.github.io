@@ -15,13 +15,11 @@
         <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
 
           {% assign category = page.title %}
-
-          <h3 id="#{{ category }}">Category: {{ category }}</h3>
-
           <div>
             {% for post in site.posts %}
-              {% if post.category == category %}
-                {% include post-list.html%}
+              
+              {% if post.category == category%}
+              {% include post-list.html%}
               {% endif %}
             {% endfor %}
           </div>
