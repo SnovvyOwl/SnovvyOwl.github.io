@@ -112,7 +112,7 @@ void Interrupt_B();
 
 
 
-<pre><code data-trim class="yml">
+```c
 #include<iostream>
 #include<wiringPi.h>
 #define PhaseA 21
@@ -204,7 +204,7 @@ void Interrupt_B() {
         }
     }
 }
-</code></pre>
+```
 
 
 

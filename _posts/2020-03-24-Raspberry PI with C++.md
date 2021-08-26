@@ -52,7 +52,7 @@ inputCMD.detach();
 
 만약 자식쓰레드인 inputCMD가 종료될때까지 기다리는것을 하고 싶으면 inputCMD.join()을 사용하면 된다.
 
-<pre><code>
+```c
 #include&lt;thread&gt;
 #include&lt;iostream&gt;
 using namespace std;
@@ -115,4 +115,4 @@ int main()
     return 0;
 }
 
-</code></pre>
+```
