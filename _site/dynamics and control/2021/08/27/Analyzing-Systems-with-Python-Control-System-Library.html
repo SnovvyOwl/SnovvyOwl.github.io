@@ -1,0 +1,574 @@
+
+<!-- Post Layout Start -->
+
+<!DOCTYPE html>
+<html lang="ko">
+
+  
+<!-- HEAD Start -->
+
+<head>
+  
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Blog and website of SnowyOwl, blogging mainly for Embedded System, Robotics, Dynamics modeling, Control Theory, Computer Vistion, ML, DL and RL Opinions expressed are mine.">
+  <meta name="author" content="Seongwon Lee">
+  <meta name="keywords" content="Robotics, Autonumus car,Machine Learing, Deep Learning, Reinforcement Learning, Photograph">
+  <link rel="canonical" href="/dynamics%20and%20control/2021/08/27/Analyzing-Systems-with-Python-Control-System-Library.html">
+  <title>{SnowyOwl} | Analyzing Systems with Python Control System Library</title>
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <link href="/css/grayscale.css" rel="stylesheet">
+  
+
+  <!-- Custom Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/rrssb.css" />
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo_white.png">
+  
+
+  
+
+  
+
+
+  <!-- iOS Web App mode -->
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" sizes="36x36" href="/img/web-app/icon-36p.png">
+  <link rel="apple-touch-icon" sizes="48x48" href="/img/web-app/icon-48p.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/img/web-app/icon-72p.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="/img/web-app/icon-96p.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/img/web-app/icon-144p.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/img/web-app/icon-192p.png">
+
+  <!-- Android Web App mode -->
+
+  <link rel="manifest" href="/manifest.json">
+
+
+
+
+  
+<!-- Chrome, Firefox OS and Opera -->
+<meta name="theme-color" content="#000000">
+<!-- Windows Phone -->
+<meta name="msapplication-navbutton-color" content="#000000">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+  
+
+
+  <!-- Syntax highlight in post pages -->
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/monokai_sublime.min.css">
+
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+      
+      
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+  
+</head>
+
+<!-- HEAD End -->
+
+
+  <body>
+
+    
+<!-- Navigation Start -->
+
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+        <i class="fa fa-bars"></i>
+      </button>
+      
+        <a class="navbar-brand" href="/">
+      
+          <div>
+            
+              <img src="/img/logo_white.png" alt="">
+            
+	    
+              {SnowyOwl}
+          </div>
+        </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <ul class="nav navbar-nav">
+        
+          <!-- Blog, Post, Tag and Error pages -->
+          
+            <li>
+            
+                <a href="/#profile"> profile </a>
+            
+            </li>
+          
+            <li>
+            
+              
+                <a href="/blog/"> Blog </a>
+              
+            
+            </li>
+          
+            <li>
+            
+                <a href="/#timeline"> Timeline </a>
+            
+            </li>
+          
+            <li>
+            
+                <a href="/#contact"> Contact </a>
+            
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Navigation End -->
+
+
+    <section id="post" class="container content-section text-center">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+
+          
+<!-- Swipe Instructions Start -->
+
+<div id="swipe-instruction">
+  <div>
+    <p><br><br><br></p>
+    <i id="hand-swipe" class="fa fa-hand-o-up"></i>
+    <p><strong>
+    
+      Did you know that you can navigate the posts by swiping left and right?
+    
+    </strong></p>
+    <button type="button" class="btn btn-default ok-btn close-swipe-instruction">
+      
+        Awesome!
+      
+    </button>
+  </div>
+</div>
+
+<!-- Swipe Instructions End -->
+
+
+          <h1><strong>Analyzing Systems with Python Control System Library</strong></h1>
+          <h4>
+            <strong>27 Aug 2021</strong>
+            <small>
+              . category:
+              <a class="category" href="/categories/dynamics and control.html">
+                dynamics and control
+              </a>.
+              <a href="/dynamics%20and%20control/2021/08/27/Analyzing-Systems-with-Python-Control-System-Library.html#disqus_thread">Comments</a>
+              <br />
+              
+                <a class="tag" href="/tags/python.html">#python</a>
+              
+                <a class="tag" href="/tags/ubuntu.html">#ubuntu</a>
+              
+            </small>
+          </h4>
+          
+          <section class="text-justify">
+            <p>우리 학교 기계공학과에서 각종 프로젝트를 진행하게 되면 각종 수치 계산을 포함해서 간단한 프로그래밍 전부 MATLAB에 의존하는 경우가 많다.
+물론 MATLAB이 사용하기 쉽고 편하다는 사실은 부정할 수 없다. 하지만 MATLAB에겐 치명적인 단점이 있는데 이는 MATLAB이 유료라는 사실이다.<br />
+각 종 라이브러리도 전부다 사야하고 필요한 툴박스를 구매하기 위한 비용을 생각 하지 않을 수 없다.<br />
+결국 MATLAB이라는 유료 플랫폼을 거칠 수 없는 환경이 결국 왔을 때 이 한계는 크게 느껴질 것이라고 생각한다.</p>
+
+<p>그래서 MATLAB을 사용하지 못하게 될때를 대비하기 위해 MATLAB의 대체제를 찾고 있는데 나는 이것을 Python이라고 생각한다.<br />
+실제로 MATLAB의 Symbolic toolbox는 Python의 sympy로 대체 가능하고 그외 자주 사용하는 여러 MATLAB의 toolbox를 Python에서도 지원한다.<br />
+나는 로봇의 움직임을 제어하는 것을 공부하는 기계공학과 학생이므로 MATLAB의 Control System Tool Box 를 대체할 Python libary를 찾았다.</p>
+
+<p>그것을 바로 Python Control system library 이다.</p>
+
+<h1 id="python-control-systems-library"><a href="https://python-control.readthedocs.io/en/0.9.0/">Python Control Systems Library</a></h1>
+<h2 id="install">Install</h2>
+<pre><code class="language-dotnetcli">pip3 install slycot   # optional
+pip3 install control
+</code></pre>
+<p>control 만 설치해도 기본적인 기능은 돌아가지만 모든 기능을 하기 위해서는 slycot을 필수로 설치해주는 것을 권장한다.<br />
+slycot은 control libaray를 wrapping 해주는 library인데 설치 할때는 Fortran compiler 가 필요하다.</p>
+
+<pre><code class="language-dotnetcli">sudo apt install gfortran   #ubuntu
+</code></pre>
+<p>ubuntu 환경에서 fortran Compiler를 아래와 같이 입력해주면 설치가 된다.</p>
+
+<pre><code class="language-dotnetcli">conda install numpy scipy matplotlib    # if not yet installed
+conda install -c conda-forge control
+</code></pre>
+<p>Conda 환경이면 이렇게 install 하면 된다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">control</span>
+</code></pre></div></div>
+<p>사용하는 방법은 control을 import 하면 된다.</p>
+
+<h2 id="system-creation">System creation</h2>
+<p>자주 쓰는 Method를 간략하게 포스팅하겠다.<br />
+먼저 State Space represention 위한 <code class="language-plaintext highlighter-rouge">control.ss()</code> 이다</p>
+
+<p>연속시간계인 $x$에서<br />
+$\dot{x}=Ax+Bu$<br />
+$y=Cx+Du$</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">A</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">]])</span>
+<span class="n">B</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">],[</span><span class="mi">7</span><span class="p">]])</span>
+<span class="n">C</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<span class="n">D</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">9</span><span class="p">])</span>
+<span class="n">sys</span><span class="o">=</span><span class="n">control</span><span class="p">.</span><span class="n">ss</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span>
+</code></pre></div></div>
+<p>불연속 시간계에서는<br />
+$ x[k+1]=Ax[k]+Bu[k]$<br />
+$y[k]=Cx[k]+Du[k]$</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">sys</span><span class="o">=</span><span class="n">control</span><span class="p">.</span><span class="n">ss</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">,</span><span class="n">dt</span><span class="p">)</span> <span class="c1">#dt는 sampling Time
+</span></code></pre></div></div>
+<p>이고 이 메서드의 반환 값은 contorl.ss 의 형태로 반환된다.</p>
+
+<p>두번째는 Transfer Function에 해당하는 <code class="language-plaintext highlighter-rouge">tf()</code>이다.
+만약 $\cfrac{s+1}{s^2+s+1}$ 에 해당하는 시스템이 있다고 하자<br />
+그럼 여기서 numerator는 s+1이고 denominator는 $s^2+s+1$이다.<br />
+이것을 파이썬으로 옮긴다면 아래와 같다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">num</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">den</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">sys_tf_continous</span><span class="o">=</span><span class="n">control</span><span class="p">.</span><span class="n">tf</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">)</span> <span class="c1">#연속시간계
+</span><span class="n">sys_tf_discrete</span><span class="o">=</span><span class="n">control</span><span class="p">.</span><span class="n">tf</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">,</span><span class="n">dt</span><span class="p">)</span> <span class="c1">#불연속 시간계에서 dt는 sampling Time
+</span></code></pre></div></div>
+<p>이건 다른 사용법이하나 더있는데 아래와 같은 방법으로도 쓸수 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="o">=</span><span class="n">control</span><span class="p">.</span><span class="n">tf</span><span class="p">(</span><span class="s">'s'</span><span class="p">)</span>
+<span class="n">G</span><span class="o">=</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<p>또한 공부를 하다보면 State Space 표현을 Transfer Function 표현으로 바꿔야 할때와 그 반대 상황으로 바꿔야 할때가 있다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st</span><span class="o">=</span><span class="n">control</span><span class="p">.</span><span class="n">ss2tf</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span> <span class="c1">#State Space에서 Transfer Function으로 바꿈
+</span><span class="n">ss</span><span class="o">=</span><span class="n">control</span><span class="p">.</span><span class="n">tf2ss</span><span class="p">(</span><span class="n">sys_tf_continuous</span><span class="p">)</span> <span class="c1">#Transfer Function에서 State Space로 바꿈
+</span></code></pre></div></div>
+<p>그때 쓸수 있는 메서드이다.</p>
+
+<h2 id="control-system-analysis">Control system analysis</h2>
+<p>시스템을 해석하기 위해 다양한 선도를 그릴 필요가 있는데 대표적으로 root locus, Bode선도, Nyquist 선도등이 있다.</p>
+
+<h3 id="root-locus">Root Locus</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">rlist</span> <span class="p">,</span><span class="n">klist</span><span class="o">=</span><span class="n">control</span><span class="p">.</span><span class="n">root_locus</span><span class="p">(</span><span class="n">sys_tf_continous</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rlist</span><span class="p">,</span><span class="n">klist</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+<p>루트로커스 선도 그리는 방법이다.</p>
+
+<h3 id="bode-선도">Bode 선도</h3>
+<pre><code class="language-pyhton">sys = control.ss([[1, -2], [3, -4]], [[5], [7]], [[6, 8]], [[9]])
+mag, phase, omega = control.bode(sys)
+</code></pre>
+<p>Bode 선도 그리는 방법이다.</p>
+
+<h3 id="nyquist-선도">Nyquist 선도</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sys</span> <span class="o">=</span> <span class="n">control</span><span class="p">.</span><span class="n">ss</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">9</span><span class="p">]])</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">control</span><span class="p">.</span><span class="n">nyquist_plot</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+</code></pre></div></div>
+<p>State Space 에서이 시스템이 제어가능한지 관측가능한지 확인하기 위해 가제어성 행렬과 가관측성 행렬을 뽑을 필요가 있다.<br />
+이때 사용가능한 명령어는 다음과 같다</p>
+
+<h3 id="controllabilty-and-observability">Controllabilty and Observability</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C</span> <span class="o">=</span> <span class="n">ctrb</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> <span class="c1"># Controllabilty matrix
+</span><span class="n">O</span> <span class="o">=</span> <span class="n">obsv</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span> <span class="c1"># Observability matrix
+</span></code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">C</code>와 <code class="language-plaintext highlighter-rouge">O</code>의 rank가 각각 Full 일때 제어가능하고 관측 가능하다라고 말한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">control</span><span class="p">.</span><span class="n">lyap</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">E</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span> <span class="c1">#Lyapunov equation
+</span></code></pre></div></div>
+<p>이 외에도 Lyapunov equation를 푸는 메서드가 있다.</p>
+
+<h2 id="control-system-synthesis">Control System Synthesis</h2>
+<p>state space에서 Control Gain K를 얻는 방법으로 Ankermann Method와 LQR Method가 있다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">K</span> <span class="o">=</span> <span class="n">control</span><span class="p">.</span><span class="n">acker</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">poles</span><span class="p">)</span> <span class="c1"># Ackermann method
+</span><span class="n">K</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">E</span> <span class="o">=</span> <span class="n">lqr</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="p">[</span><span class="n">N</span><span class="p">])</span> <span class="c1"># Linear quadratic regulator design
+</span></code></pre></div></div>
+<p>이것 역시 코드로 쉽게 계산할 수 있다.</p>
+
+<h2 id="input-output-system">Input Output System</h2>
+<p>Step Input과 Impulse Input에 대한 반응은 tf 일때와 ss일때 둘 다 변환 없이 출력이 가능하다. 그리고 입력이 일정할경우에도 출력가능하다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">T</span><span class="p">,</span> <span class="n">yout</span> <span class="o">=</span> <span class="n">step_response</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">X0</span><span class="p">)</span> <span class="c1">#step Responce
+</span><span class="n">T</span><span class="p">,</span> <span class="n">yout</span> <span class="o">=</span> <span class="n">impulse_response</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">X0</span><span class="p">)</span> <span class="c1"># Impulse Responce
+</span><span class="n">T</span><span class="p">,</span> <span class="n">yout</span><span class="p">,</span> <span class="n">xout</span> <span class="o">=</span> <span class="n">forced_response</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">X0</span><span class="p">)</span><span class="c1"># Const U
+</span></code></pre></div></div>
+<p>여러 Input을 주었을 때 Output이 출력해야 할때 도 있다.<br />
+그렇다면 기존의 <code class="language-plaintext highlighter-rouge">control.tf</code>와 <code class="language-plaintext highlighter-rouge">control.ss</code> 를 <code class="language-plaintext highlighter-rouge">control.InputOutputsystem</code>으로 변환해줄 필요가 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tfiosys</span><span class="o">=</span><span class="n">control</span><span class="p">.</span><span class="n">tf2io</span><span class="p">(</span><span class="n">sys_tf_continuous</span><span class="p">)</span> <span class="c1"># Transfer Function을 Input Output System으로 변환
+</span><span class="n">ssiossy</span><span class="o">=</span><span class="n">control</span><span class="p">.</span><span class="n">ss2io</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span> <span class="c1"># State Space를 Input Output System으로 변환
+</span></code></pre></div></div>
+
+<p>이렇게 변환이 됬다면 Input <code class="language-plaintext highlighter-rouge">U</code>를 Array 형태에 데이터가 일정하지 않고 그것에 따른 시간 <code class="language-plaintext highlighter-rouge">T</code> array가 있으면 이를 바탕으로 직접 입력에 따른 출력값을 얻을 수 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Y</span> <span class="o">=</span> <span class="n">control</span><span class="p">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">tfiosys</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>이렇게 간략하게 Python Control System Library를 정리해보는 것으로 포스팅을 마감한다.</p>
+
+          </section>
+
+          
+<!-- Share Buttons Start -->
+<div>
+  <ul class="rrssb-buttons clearfix">
+    
+      <li class="rrssb-email">
+        <a href="mailto:?subject=Analyzing Systems with Python Control System Library&body=https://SnovvyOwl.github.io/dynamics%20and%20control/2021/08/27/Analyzing-Systems-with-Python-Control-System-Library.html" data-proofer-ignore>
+          <span class="rrssb-icon">
+            <svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+              <path d="M20.11 26.147c-2.335 1.05-4.36 1.4-7.124 1.4C6.524 27.548.84 22.916.84 15.284.84 7.343 6.602.45 15.4.45c6.854 0 11.8 4.7 11.8 11.252 0 5.684-3.193 9.265-7.398 9.3-1.83 0-3.153-.934-3.347-2.997h-.077c-1.208 1.986-2.96 2.997-5.023 2.997-2.532 0-4.36-1.868-4.36-5.062 0-4.75 3.503-9.07 9.11-9.07 1.713 0 3.7.4 4.6.972l-1.17 7.203c-.387 2.298-.115 3.3 1 3.4 1.674 0 3.774-2.102 3.774-6.58 0-5.06-3.27-8.994-9.304-8.994C9.05 2.87 3.83 7.545 3.83 14.97c0 6.5 4.2 10.2 10 10.202 1.987 0 4.09-.43 5.647-1.245l.634 2.22zM16.647 10.1c-.31-.078-.7-.155-1.207-.155-2.572 0-4.596 2.53-4.596 5.53 0 1.5.7 2.4 1.9 2.4 1.44 0 2.96-1.83 3.31-4.088l.592-3.72z"
+              />
+            </svg>
+          </span>
+          <span class="rrssb-text">email</span>
+        </a>
+      </li>
+    
+    
+      <li class="rrssb-facebook">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://SnovvyOwl.github.io/dynamics%20and%20control/2021/08/27/Analyzing-Systems-with-Python-Control-System-Library.html&title=Analyzing Systems with Python Control System Library" class="popup">
+          <span class="rrssb-icon">
+            <svg xmlns="https://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" width="29" height="29" viewBox="0 0 29 29"><path d="M26.4 0H2.6C1.714 0 0 1.715 0 2.6v23.8c0 .884 1.715 2.6 2.6 2.6h12.393V17.988h-3.996v-3.98h3.997v-3.062c0-3.746 2.835-5.97 6.177-5.97 1.6 0 2.444.173 2.845.226v3.792H21.18c-1.817 0-2.156.9-2.156 2.168v2.847h5.045l-.66 3.978h-4.386V29H26.4c.884 0 2.6-1.716 2.6-2.6V2.6c0-.885-1.716-2.6-2.6-2.6z"
+              class="cls-2" fill-rule="evenodd"/></svg>
+          </span>
+          <span class="rrssb-text">facebook</span>
+        </a>
+      </li>
+    
+    
+      <li class="rrssb-twitter">
+        <a href="https://twitter.com/share?url=https://SnovvyOwl.github.io/dynamics%20and%20control/2021/08/27/Analyzing-Systems-with-Python-Control-System-Library.html&text=Analyzing Systems with Python Control System Library"
+        class="popup">
+          <span class="rrssb-icon"><svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><path d="M24.253 8.756C24.69 17.08 18.297 24.182 9.97 24.62c-3.122.162-6.22-.646-8.86-2.32 2.702.18 5.375-.648 7.507-2.32-2.072-.248-3.818-1.662-4.49-3.64.802.13 1.62.077 2.4-.154-2.482-.466-4.312-2.586-4.412-5.11.688.276 1.426.408 2.168.387-2.135-1.65-2.73-4.62-1.394-6.965C5.574 7.816 9.54 9.84 13.802 10.07c-.842-2.738.694-5.64 3.434-6.48 2.018-.624 4.212.043 5.546 1.682 1.186-.213 2.318-.662 3.33-1.317-.386 1.256-1.248 2.312-2.4 2.942 1.048-.106 2.07-.394 3.02-.85-.458 1.182-1.343 2.15-2.48 2.71z"/></svg></span>
+          <span class="rrssb-text">twitter</span>
+        </a>
+      </li>
+    
+    
+      <li class="rrssb-linkedin">
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://SnovvyOwl.github.io/dynamics%20and%20control/2021/08/27/Analyzing-Systems-with-Python-Control-System-Library.html" class="popup">
+        <span class="rrssb-icon">
+          <svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+            <path d="M25.424 15.887v8.447h-4.896v-7.882c0-1.98-.71-3.33-2.48-3.33-1.354 0-2.158.91-2.514 1.802-.13.315-.162.753-.162 1.194v8.216h-4.9s.067-13.35 0-14.73h4.9v2.087c-.01.017-.023.033-.033.05h.032v-.05c.65-1.002 1.812-2.435 4.414-2.435 3.222 0 5.638 2.106 5.638 6.632zM5.348 2.5c-1.676 0-2.772 1.093-2.772 2.54 0 1.42 1.066 2.538 2.717 2.546h.032c1.71 0 2.77-1.132 2.77-2.546C8.056 3.593 7.02 2.5 5.344 2.5h.005zm-2.48 21.834h4.896V9.604H2.867v14.73z"
+            />
+          </svg>
+        </span>
+        <span class="rrssb-text">linkedin</span>
+      </a>
+      </li>
+    
+    
+      <li class="rrssb-reddit">
+        <a href="https://www.reddit.com/submit?url=https://SnovvyOwl.github.io/dynamics%20and%20control/2021/08/27/Analyzing-Systems-with-Python-Control-System-Library.html&title=Analyzing Systems with Python Control System Library" target="_blank">
+          <span class="rrssb-icon">
+            <svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+              <path d="M11.794 15.316c0-1.03-.835-1.895-1.866-1.895-1.03 0-1.893.866-1.893 1.896s.863 1.9 1.9 1.9c1.023-.016 1.865-.916 1.865-1.9zM18.1 13.422c-1.03 0-1.895.864-1.895 1.895 0 1 .9 1.9 1.9 1.865 1.03 0 1.87-.836 1.87-1.865-.006-1.017-.875-1.917-1.875-1.895zM17.527 19.79c-.678.68-1.826 1.007-3.514 1.007h-.03c-1.686 0-2.834-.328-3.51-1.005-.264-.265-.693-.265-.958 0-.264.265-.264.7 0 1 .943.9 2.4 1.4 4.5 1.402.005 0 0 0 0 0 .005 0 0 0 0 0 2.066 0 3.527-.46 4.47-1.402.265-.264.265-.693.002-.958-.267-.334-.688-.334-.988-.043z"
+              />
+              <path d="M27.707 13.267c0-1.785-1.453-3.237-3.236-3.237-.792 0-1.517.287-2.08.76-2.04-1.294-4.647-2.068-7.44-2.218l1.484-4.69 4.062.955c.07 1.4 1.3 2.6 2.7 2.555 1.488 0 2.695-1.208 2.695-2.695C25.88 3.2 24.7 2 23.2 2c-1.06 0-1.98.616-2.42 1.508l-4.633-1.09c-.344-.082-.693.117-.803.454l-1.793 5.7C10.55 8.6 7.7 9.4 5.6 10.75c-.594-.45-1.3-.75-2.1-.72-1.785 0-3.237 1.45-3.237 3.2 0 1.1.6 2.1 1.4 2.69-.04.27-.06.55-.06.83 0 2.3 1.3 4.4 3.7 5.9 2.298 1.5 5.3 2.3 8.6 2.325 3.227 0 6.27-.825 8.57-2.325 2.387-1.56 3.7-3.66 3.7-5.917 0-.26-.016-.514-.05-.768.965-.465 1.577-1.565 1.577-2.698zm-4.52-9.912c.74 0 1.3.6 1.3 1.3 0 .738-.6 1.34-1.34 1.34s-1.343-.602-1.343-1.34c.04-.655.596-1.255 1.396-1.3zM1.646 13.3c0-1.038.845-1.882 1.883-1.882.31 0 .6.1.9.21-1.05.867-1.813 1.86-2.26 2.9-.338-.328-.57-.728-.57-1.26zm20.126 8.27c-2.082 1.357-4.863 2.105-7.83 2.105-2.968 0-5.748-.748-7.83-2.105-1.99-1.3-3.087-3-3.087-4.782 0-1.784 1.097-3.484 3.088-4.784 2.08-1.358 4.86-2.106 7.828-2.106 2.967 0 5.7.7 7.8 2.106 1.99 1.3 3.1 3 3.1 4.784C24.86 18.6 23.8 20.3 21.8 21.57zm4.014-6.97c-.432-1.084-1.19-2.095-2.244-2.977.273-.156.59-.245.928-.245 1.036 0 1.9.8 1.9 1.9-.016.522-.27 1.022-.57 1.327z"
+              />
+            </svg>
+          </span>
+          <span class="rrssb-text">reddit</span>
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+<!-- Share Buttons End -->
+
+
+          
+
+
+          <hr />
+
+          
+          <div class="author row">
+            <img class="col-xs-4 col-sm-3 col-md-2" src="/img/author.jpg" alt="Me" />
+            <p class="col-xs-8 col-sm-9 col-md-10">
+              Seongwon Lee
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Start -->
+
+<footer>
+
+    <!-- Social Buttons Start -->
+
+<ul class="list-inline social-buttons">
+    
+    
+        
+        <li><a href="https://instagram.com/S.nowyo.W.L" target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
+        
+    
+    
+        
+        <li><a href="https://github.com/SnovvyOwl" target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+        
+    
+    
+        
+        <li><a href="https://blog.naver.com/owl0614" target="_blank"><i class="ri-pages-line"></i></a></li>
+        
+    
+    
+</ul>
+
+<!-- Social Buttons End -->
+
+
+    <p><br><br></p>
+
+    <div class="container text-center">
+        <p>Copyright &copy; Seongwon Lee 2021</p>
+        
+    </div>
+</footer>
+
+<p></p>
+
+<!-- Footer End -->
+
+
+    
+<!-- Javascript Start -->
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<!--* Start Bootstrap - Grayscale Bootstrap Theme (http://startbootstrap.com)
+* Code licensed under the Apache License v2.0.
+* For details, see http://www.apache.org/licenses/LICENSE-2.0.-->
+<script>
+function toggleNavCollapse(){50<$(".navbar").offset().top?$(".navbar-fixed-top").addClass("top-nav-collapse"):$(".navbar-fixed-top").removeClass("top-nav-collapse");}
+$(document).ready(toggleNavCollapse);
+$(window).scroll(toggleNavCollapse);$(function(){$("a.page-scroll").bind("click",function(b){var a=$(this);$("html, body").stop().animate({scrollTop:$(a.attr("href")).offset().top-50},1500,"easeInOutExpo",function(){a.blur()});b.preventDefault()})});$(".navbar-collapse ul li a").click(function(){$(".navbar-toggle:visible").click()});
+</script>
+
+
+
+
+
+  <!-- Syntax highlight in post pages-->
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+
+
+  <!-- Share buttons Start -->
+
+  <script src="/js/rrssb.min.js"></script>
+
+  <!-- Share buttons End -->
+
+
+
+
+
+<script>
+function addTohistory() {
+  if (!window.location.host.startsWith("127.0.0.1")) {
+    history.pushState({}, 'Analyzing Systems with Python Control System Library', 'https://SnovvyOwl.github.io/dynamics%20and%20control/2021/08/27/Analyzing-Systems-with-Python-Control-System-Library.html');
+  }
+}
+</script>
+
+<!-- Gesture Navigation / Swipe Instruction Start -->
+
+
+<!-- Javascript End -->
+
+
+  </body>
+</html>
+
+<!-- Post Layout End -->
