@@ -1,7 +1,7 @@
 ---
 layout: post
 section-type: post
-title: Calculate system by openCV mat class[cv::Mat]
+title: Calculate Matrix by openCV mat class[cv::Mat]
 category: KHU-KongBot
 tags: [ 'c++','ubuntu','opencv']
 ---
