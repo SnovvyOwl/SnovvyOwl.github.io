@@ -57,7 +57,7 @@ start-delay: 200
 delete-delay: 5000
 lines: # You can add HTML Tags in the Text
   - text: "SnowyOwl's Dev Story"
-  - text: "I'm Engineer, Programer and Photographer"
+  - text: "I'm Engineer, Programmer and Photographer"
 
 me-img: "/img/me.jpg"
 
